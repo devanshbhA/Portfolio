@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devansh Bhardwaj — Portfolio</title>
+    <meta name="description" content="Portfolio of Devansh Bhardwaj — Computer Science student, Web Developer, Founder of Orbnet. Based in Jaipur, India.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background wallpaper layer -->
+    <div class="wallpaper-bg" id="wallpaperBg"></div>
+
+    <!-- Particle canvas -->
+    <canvas id="particles"></canvas>
+
+    <!-- BROWSER WINDOW -->
+    <div class="browser-window" id="browserWindow">
+        <!-- Title bar -->
+        <div class="browser-titlebar">
+            <div class="traffic-lights">
+                <span class="traffic-light red" id="btnClose"></span>
+                <span class="traffic-light yellow" id="btnMinimize"></span>
+                <span class="traffic-light green" id="btnMaximize"></span>
+            </div>
+            <div class="titlebar-text">Devansh Bhardwaj — Portfolio</div>
+            <div class="titlebar-spacer"></div>
+        </div>
+
+        <!-- Tab bar -->
+        <div class="browser-tabs">
+            <div class="tab active" data-tab="home" id="tabHome">
+                <svg class="tab-favicon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="tab-label">Home</span>
+            </div>
+            <div class="tab" data-tab="about" id="tabAbout">
+                <svg class="tab-favicon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <span class="tab-label">About</span>
+            </div>
+            <div class="tab" data-tab="experience" id="tabExperience">
+                <svg class="tab-favicon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+                <span class="tab-label">Experience</span>
+            </div>
+            <div class="tab" data-tab="projects" id="tabProjects">
+                <svg class="tab-favicon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                <span class="tab-label">Projects</span>
+            </div>
+            <div class="tab" data-tab="skills" id="tabSkills">
+                <svg class="tab-favicon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span class="tab-label">Skills</span>
+            </div>
+            <div class="tab" data-tab="contact" id="tabContact">
+                <svg class="tab-favicon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <span class="tab-label">Contact</span>
+            </div>
+            <div class="tab-new" id="tabNew" title="New Tab">+</div>
+        </div>
+
+        <!-- URL Bar -->
+        <div class="browser-toolbar">
+            <div class="toolbar-buttons">
+                <button class="nav-btn" id="btnBack" title="Back">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                </button>
+                <button class="nav-btn" id="btnForward" title="Forward">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button class="nav-btn" id="btnRefresh" title="Refresh">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15"/></svg>
+                </button>
+            </div>
+            <div class="url-bar" id="urlBar">
+                <svg class="url-lock" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                <input type="text" class="url-input" id="urlInput" value="devansh.dev/home" autocomplete="off" spellcheck="false" placeholder="Search portfolio or type URL">
+            </div>
+            <div class="toolbar-actions">
+                <button class="nav-btn" id="btnWallpaper" title="Change Wallpaper">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </button>
+                <button class="nav-btn" id="btnBookmark" title="Bookmark">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+                </button>
+                <button class="nav-btn" id="btnSettings" title="Customize and control">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Bookmarks bar -->
+        <div class="bookmarks-bar">
+            <a href="https://www.linkedin.com/in/devansh-bhardwaj-b82632324/" target="_blank" class="bookmark-item" id="bookmarkLinkedin">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+            </a>
+            <a href="https://orbnet.in" target="_blank" class="bookmark-item" id="bookmarkOrbnet">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                Orbnet
+            </a>
+            <a href="mailto:devanshbhardwaj375@gmail.com" class="bookmark-item" id="bookmarkEmail">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Email
+            </a>
+            <a href="https://github.com" target="_blank" class="bookmark-item" id="bookmarkGithub">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+            </a>
+        </div>
+
+        <!-- Loading bar -->
+        <div class="loading-bar" id="loadingBar"></div>
+
+        <!-- Wallpaper picker panel -->
+        <div class="wallpaper-panel" id="wallpaperPanel">
+            <div class="wallpaper-panel-header">
+                <span>Choose Background</span>
+                <button class="wallpaper-close" id="wallpaperClose">&times;</button>
+            </div>
+            <div class="wallpaper-options">
+                <button class="wallpaper-option active" data-wallpaper="clean" id="wpClean">
+                    <div class="wp-preview wp-clean"></div>
+                    <span>Clean</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="gradient1" id="wpGradient1">
+                    <div class="wp-preview wp-gradient1"></div>
+                    <span>Sunset</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="gradient2" id="wpGradient2">
+                    <div class="wp-preview wp-gradient2"></div>
+                    <span>Ocean</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="gradient3" id="wpGradient3">
+                    <div class="wp-preview wp-gradient3"></div>
+                    <span>Forest</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="gradient4" id="wpGradient4">
+                    <div class="wp-preview wp-gradient4"></div>
+                    <span>Aurora</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="gradient5" id="wpGradient5">
+                    <div class="wp-preview wp-gradient5"></div>
+                    <span>Lavender</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="dark" id="wpDark">
+                    <div class="wp-preview wp-dark"></div>
+                    <span>Dark</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="mesh" id="wpMesh">
+                    <div class="wp-preview wp-mesh"></div>
+                    <span>Mesh</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="paris" id="wpParis">
+                    <div class="wp-preview wp-paris"></div>
+                    <span>Paris</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="cars" id="wpCars">
+                    <div class="wp-preview wp-cars"></div>
+                    <span>Cars</span>
+                </button>
+                <button class="wallpaper-option" data-wallpaper="scenery" id="wpScenery">
+                    <div class="wp-preview wp-scenery"></div>
+                    <span>Scenery</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Settings panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="settings-menu">
+                <div class="settings-item" id="setTheme">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <span>Toggle Theme</span>
+                </div>
+                <div class="settings-item" id="setPrint">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                    <span>Print Resume</span>
+                </div>
+                <div class="settings-divider"></div>
+                <div class="settings-item" id="setAbout">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    <span>About DevFox</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE CONTENT -->
+        <div class="browser-content" id="browserContent">
+
+            <!-- HOME PAGE -->
+            <section class="page active" id="pageHome" data-page="home">
+                <div class="hero">
+                    <div class="hero-content">
+                        <div class="hero-avatar-wrapper">
+                            <div class="avatar-ring">
+                                <img src="avatar.png" alt="Devansh Bhardwaj" class="hero-avatar" id="heroAvatar">
+                            </div>
+                            <div class="avatar-status"></div>
+                        </div>
+                        <div class="hero-text">
+                            <div class="hero-greeting" id="heroGreeting">Hello World, I'm</div>
+                            <h1 class="hero-name" id="heroName">
+                                <span class="name-line">Devansh</span>
+                                <span class="name-line gradient-text">Bhardwaj</span>
+                            </h1>
+                            <div class="hero-title" id="heroTitle">
+                                <span class="typing-text"></span>
+                                <span class="typing-cursor">|</span>
+                            </div>
+                            <p class="hero-bio">
+                                Computer Science student & entrepreneur building the future of the web. 
+                                Founder of <strong>Orbnet</strong>. Based in Jaipur, India.
+                            </p>
+                            <div class="hero-cta">
+                                <button class="btn btn-primary" data-navigate="about" id="btnViewWork">
+                                    <span>Explore My Work</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </button>
+                                <button class="btn btn-outline" data-navigate="contact" id="btnHireMe">
+                                    <span>Hire Me</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats strip -->
+                    <div class="stats-strip">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="3">0</div>
+                            <div class="stat-label">Months Exp</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="5">0</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="1">0</div>
+                            <div class="stat-label">Founded</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="6">0</div>
+                            <div class="stat-label">Technologies</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ABOUT PAGE -->
+            <section class="page" id="pageAbout" data-page="about">
+                <div class="page-inner">
+                    <div class="section-header">
+                        <span class="section-tag">&lt;about&gt;</span>
+                        <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+                        <div class="section-line"></div>
+                    </div>
+
+                    <div class="about-grid">
+                        <div class="about-card glass-card">
+                            <div class="terminal-window">
+                                <div class="terminal-header">
+                                    <div class="terminal-dots">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <span class="terminal-title">devansh@portfolio ~ %</span>
+                                </div>
+                                <div class="terminal-body">
+                                    <div class="terminal-line">
+                                        <span class="prompt">$</span>
+                                        <span class="cmd">cat about.json</span>
+                                    </div>
+                                    <pre class="terminal-output">{
+  <span class="json-key">"name"</span>: <span class="json-value">"Devansh Bhardwaj"</span>,
+  <span class="json-key">"role"</span>: <span class="json-value">"CS Student & Web Developer"</span>,
+  <span class="json-key">"education"</span>: <span class="json-value">"B.Tech CSE @ GIT Jaipur"</span>,
+  <span class="json-key">"year"</span>: <span class="json-value">"2nd Year (2025-2029)"</span>,
+  <span class="json-key">"location"</span>: <span class="json-value">"Jaipur, India"</span>,
+  <span class="json-key">"phone"</span>: <span class="json-value">"+91-9509033142"</span>,
+  <span class="json-key">"email"</span>: <span class="json-value">"devanshbhardwaj375@gmail.com"</span>,
+  <span class="json-key">"website"</span>: <span class="json-value">"orbnet.in"</span>,
+  <span class="json-key">"passion"</span>: <span class="json-value">"Building things on the internet"</span>,
+  <span class="json-key">"vibe_coded"</span>: <span class="json-value">true</span>
+}</pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="about-card glass-card about-story">
+                            <h3>My Story</h3>
+                            <p>
+                                I'm a motivated Computer Science student and entrepreneur with real-world experience in 
+                                <strong>web development</strong>, <strong>UI/UX design</strong>, and <strong>digital content creation</strong>.
+                            </p>
+                            <p>
+                                I founded <strong>Orbnet</strong> — an internship-based platform for students — while still in my 1st year of college. 
+                                I'm comfortable managing projects independently from start to finish.
+                            </p>
+                            <p>
+                                Currently learning <strong>C++</strong> alongside coursework to strengthen my programming foundations. 
+                                I'm passionate about building things on the internet and constantly learning new technologies.
+                            </p>
+                            <div class="about-highlights">
+                                <div class="highlight-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 6 3 6 3s3 0 6-3v-5"/></svg>
+                                    <span>B.Tech CSE — GIT Jaipur</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                                    <span>Founded Orbnet in 1st year</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                    <span>Self-taught Web Developer</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                    <span>Jaipur, Rajasthan, India</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interests Section -->
+                    <div class="interests-section">
+                        <h3 class="subsection-title">Things I'm Into</h3>
+                        <div class="interests-grid">
+                            <div class="interest-card glass-card">
+                                <svg class="interest-svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="22" x2="18" y2="22"/><line x1="9" y1="18" x2="15" y2="18"/><line x1="9" y1="18" x2="9" y2="22"/><line x1="15" y1="18" x2="15" y2="22"/></svg>
+                                <h4>Gaming</h4>
+                                <p>Strategic and story-driven games; interested in game UI and player experience design.</p>
+                            </div>
+                            <div class="interest-card glass-card">
+                                <svg class="interest-svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 17h2l2-4h6l2 4h2"/><path d="M3 17h18v2H3z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 13l1-4h12l1 4"/></svg>
+                                <h4>Cars & Auto Tech</h4>
+                                <p>Passionate about car technology and how software is shaping the auto industry.</p>
+                            </div>
+                            <div class="interest-card glass-card">
+                                <svg class="interest-svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 014 4c0 1.95-2 4-4 6-2-2-4-4.05-4-6a4 4 0 014-4z"/><path d="M4.93 10.93a4 4 0 012.83-1.17c1.95 0 4 2 6 4-2 2-4.05 4-6 4a4 4 0 01-2.83-6.83z"/><path d="M19.07 10.93a4 4 0 00-2.83-1.17c-1.95 0-4 2-6 4 2 2 4.05 4 6 4a4 4 0 002.83-6.83z"/></svg>
+                                <h4>Emerging Tech</h4>
+                                <p>Actively exploring AI tools and new platforms as they come out.</p>
+                            </div>
+                            <div class="interest-card glass-card">
+                                <svg class="interest-svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+                                <h4>Content Creation</h4>
+                                <p>Enjoy making videos, writing scripts, and building an audience around tech topics.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="section-tag section-tag-end">&lt;/about&gt;</span>
+                </div>
+            </section>
+
+            <!-- EXPERIENCE PAGE -->
+            <section class="page" id="pageExperience" data-page="experience">
+                <div class="page-inner">
+                    <div class="section-header">
+                        <span class="section-tag">&lt;experience&gt;</span>
+                        <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
+                        <div class="section-line"></div>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item" id="expPalarsoft">
+                            <div class="timeline-marker">
+                                <div class="timeline-dot pulse"></div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div class="timeline-content glass-card">
+                                <div class="timeline-header">
+                                    <div class="timeline-company">
+                                        <h3>PALARSOFT INTERNET PVT. LTD.</h3>
+                                        <span class="timeline-badge paid">Paid · Remote</span>
+                                    </div>
+                                    <div class="timeline-date">April 2026 — June 2026</div>
+                                </div>
+                                <div class="timeline-role">Web Development Intern</div>
+                                <ul class="timeline-details">
+                                    <li>Built and maintained responsive blog websites for clients using HTML, CSS, Bootstrap, and JavaScript.</li>
+                                    <li>Worked with a team to improve website UI and fix functionality issues based on client feedback.</li>
+                                    <li>Delivered clean, working code on time and communicated regularly with teammates throughout the project.</li>
+                                </ul>
+                                <div class="timeline-tags">
+                                    <span class="tag">HTML</span>
+                                    <span class="tag">CSS</span>
+                                    <span class="tag">Bootstrap</span>
+                                    <span class="tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" id="expOrbnet">
+                            <div class="timeline-marker">
+                                <div class="timeline-dot pulse active-dot"></div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div class="timeline-content glass-card featured-card">
+                                <div class="featured-badge">Current</div>
+                                <div class="timeline-header">
+                                    <div class="timeline-company">
+                                        <h3>ORBNET</h3>
+                                        <span class="timeline-badge founder">Founder & Developer</span>
+                                    </div>
+                                    <div class="timeline-date">May 2026 — Present</div>
+                                </div>
+                                <div class="timeline-role">Founder & Developer — <a href="https://orbnet.in" target="_blank">orbnet.in</a></div>
+                                <ul class="timeline-details">
+                                    <li>Founded Orbnet, my own internship-based platform focused on creating opportunities for students.</li>
+                                    <li>Managed Google Ads and worked on improving platform visibility and outreach.</li>
+                                    <li>Collaborated with Avichal Techno Labs for listing and platform-related activities while independently managing operations.</li>
+                                </ul>
+                                <div class="timeline-tags">
+                                    <span class="tag">Entrepreneurship</span>
+                                    <span class="tag">Google Ads</span>
+                                    <span class="tag">Web Dev</span>
+                                    <span class="tag">Operations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="education-section">
+                        <h3 class="subsection-title">Education</h3>
+                        <div class="education-card glass-card">
+                            <div class="edu-icon">
+                                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 6 3 6 3s3 0 6-3v-5"/></svg>
+                            </div>
+                            <div class="edu-details">
+                                <h4>Global Institute of Technology, Jaipur</h4>
+                                <p class="edu-degree">B.Tech in Computer Science — 2nd Year</p>
+                                <p class="edu-year">2025 — 2029</p>
+                                <p class="edu-note">Learning C++ independently alongside coursework to strengthen programming foundations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="section-tag section-tag-end">&lt;/experience&gt;</span>
+                </div>
+            </section>
+
+            <!-- PROJECTS PAGE -->
+            <section class="page" id="pageProjects" data-page="projects">
+                <div class="page-inner">
+                    <div class="section-header">
+                        <span class="section-tag">&lt;projects&gt;</span>
+                        <h2 class="section-title">My <span class="gradient-text">Projects</span></h2>
+                        <div class="section-line"></div>
+                    </div>
+
+                    <div class="projects-grid">
+                        <div class="project-card glass-card" id="projectBlog">
+                            <div class="project-browser">
+                                <div class="project-browser-dots"><span></span><span></span><span></span></div>
+                                <div class="project-preview">
+                                    <div class="project-preview-content">
+                                        <div class="mock-nav"></div>
+                                        <div class="mock-hero">
+                                            <div class="mock-title"></div>
+                                            <div class="mock-text"></div>
+                                            <div class="mock-text short"></div>
+                                        </div>
+                                        <div class="mock-cards"><div class="mock-card"></div><div class="mock-card"></div><div class="mock-card"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Blog Website</h3>
+                                <p>Built a responsive, multi-page blog website with a clean layout that works well on both mobile and desktop. Added smooth scrolling and a simple navigation menu; designed the full UI from scratch.</p>
+                                <div class="project-tech">
+                                    <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card glass-card" id="projectOrbnet">
+                            <div class="project-browser">
+                                <div class="project-browser-dots"><span></span><span></span><span></span></div>
+                                <div class="project-preview orbnet-preview">
+                                    <div class="project-preview-content">
+                                        <div class="mock-nav gradient-mock"></div>
+                                        <div class="mock-hero">
+                                            <div class="mock-title gradient-mock"></div>
+                                            <div class="mock-text gradient-mock"></div>
+                                            <div class="mock-btn gradient-mock"></div>
+                                        </div>
+                                        <div class="mock-grid"><div class="mock-grid-item"></div><div class="mock-grid-item"></div><div class="mock-grid-item"></div><div class="mock-grid-item"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Orbnet — Internship Platform</h3>
+                                <p>Founded and developed Orbnet, an internship-based platform focused on creating opportunities for students. Managed Google Ads, improved platform visibility, and handled full-stack operations independently.</p>
+                                <div class="project-tech">
+                                    <span class="tag">Web Dev</span><span class="tag">Google Ads</span><span class="tag">Entrepreneurship</span>
+                                </div>
+                                <a href="https://orbnet.in" target="_blank" class="project-link">Visit Live Site →</a>
+                            </div>
+                        </div>
+
+                        <div class="project-card glass-card" id="projectAlgorithm">
+                            <div class="project-browser">
+                                <div class="project-browser-dots"><span></span><span></span><span></span></div>
+                                <div class="project-preview youtube-preview">
+                                    <div class="project-preview-content">
+                                        <div class="mock-yt-player"></div>
+                                        <div class="mock-yt-info"><div class="mock-title"></div><div class="mock-text short"></div></div>
+                                        <div class="mock-yt-sidebar"><div class="mock-yt-thumb"></div><div class="mock-yt-thumb"></div><div class="mock-yt-thumb"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Algorithm Soft — YouTube Channel</h3>
+                                <p>Started Algorithm Soft, a YouTube-based educational channel focused on programming and software topics. Handled all video production — scripting, recording, editing with DaVinci Resolve 19. Designed thumbnails and channel branding using Canva.</p>
+                                <div class="project-tech">
+                                    <span class="tag">YouTube</span><span class="tag">DaVinci Resolve</span><span class="tag">Canva</span><span class="tag">Content</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="section-tag section-tag-end">&lt;/projects&gt;</span>
+                </div>
+            </section>
+
+            <!-- SKILLS PAGE -->
+            <section class="page" id="pageSkills" data-page="skills">
+                <div class="page-inner">
+                    <div class="section-header">
+                        <span class="section-tag">&lt;skills&gt;</span>
+                        <h2 class="section-title">Technical <span class="gradient-text">Skills</span></h2>
+                        <div class="section-line"></div>
+                    </div>
+
+                    <div class="skills-container">
+                        <div class="skill-category glass-card">
+                            <div class="skill-category-header">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                <h3>Languages</h3>
+                            </div>
+                            <div class="skill-items">
+                                <div class="skill-item"><div class="skill-info"><span class="skill-name">HTML</span><span class="skill-level">Advanced</span></div><div class="skill-bar"><div class="skill-fill" data-width="90"></div></div></div>
+                                <div class="skill-item"><div class="skill-info"><span class="skill-name">CSS</span><span class="skill-level">Advanced</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+                                <div class="skill-item"><div class="skill-info"><span class="skill-name">JavaScript</span><span class="skill-level">Intermediate</span></div><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
+                                <div class="skill-item"><div class="skill-info"><span class="skill-name">C / C++</span><span class="skill-level">Learning</span></div><div class="skill-bar"><div class="skill-fill" data-width="40"></div></div></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category glass-card">
+                            <div class="skill-category-header">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                <h3>Frameworks & Database</h3>
+                            </div>
+                            <div class="skill-items">
+                                <div class="skill-item"><div class="skill-info"><span class="skill-name">Bootstrap</span><span class="skill-level">Advanced</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
+                                <div class="skill-item"><div class="skill-info"><span class="skill-name">MongoDB</span><span class="skill-level">Basic CRUD</span></div><div class="skill-bar"><div class="skill-fill" data-width="45"></div></div></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category glass-card">
+                            <div class="skill-category-header">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+                                <h3>Tools</h3>
+                            </div>
+                            <div class="skill-tools-grid">
+                                <div class="tool-badge">GitHub</div>
+                                <div class="tool-badge">VS Code</div>
+                                <div class="tool-badge">Google Antigravity</div>
+                                <div class="tool-badge">Canva</div>
+                                <div class="tool-badge">HeyGen</div>
+                                <div class="tool-badge">DaVinci Resolve 19</div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category glass-card">
+                            <div class="skill-category-header">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                <h3>Core Skills</h3>
+                            </div>
+                            <div class="skill-tools-grid">
+                                <div class="tool-badge core">Web Development</div>
+                                <div class="tool-badge core">UI Design</div>
+                                <div class="tool-badge core">Prompt Engineering</div>
+                                <div class="tool-badge core">Content Creation</div>
+                                <div class="tool-badge core">Client Communication</div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category glass-card">
+                            <div class="skill-category-header">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+                                <h3>Languages Spoken</h3>
+                            </div>
+                            <div class="spoken-langs">
+                                <div class="lang-item"><span class="lang-name">Hindi</span><span class="lang-level native">Native</span></div>
+                                <div class="lang-item"><span class="lang-name">English</span><span class="lang-level proficient">Proficient</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements -->
+                    <div class="achievements-section">
+                        <h3 class="subsection-title">Achievements</h3>
+                        <div class="achievements-grid">
+                            <div class="achievement-card glass-card">
+                                <div class="achievement-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
+                                <p>Founded Orbnet as a 1st-year student — a real web development business with actual clients and delivered projects.</p>
+                            </div>
+                            <div class="achievement-card glass-card">
+                                <div class="achievement-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+                                <p>Completed a paid internship at PALARSOFT Internet Pvt. Ltd., earning the role based on self-taught web development skills.</p>
+                            </div>
+                            <div class="achievement-card glass-card">
+                                <div class="achievement-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+                                <p>Self-taught HTML, CSS, JavaScript, Bootstrap, and MongoDB entirely on my own before and during college.</p>
+                            </div>
+                            <div class="achievement-card glass-card">
+                                <div class="achievement-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
+                                <p>Started and ran Algorithm Soft — independently managing content creation, video editing, and channel branding.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="section-tag section-tag-end">&lt;/skills&gt;</span>
+                </div>
+            </section>
+
+            <!-- CONTACT PAGE -->
+            <section class="page" id="pageContact" data-page="contact">
+                <div class="page-inner">
+                    <div class="section-header">
+                        <span class="section-tag">&lt;contact&gt;</span>
+                        <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+                        <div class="section-line"></div>
+                    </div>
+
+                    <div class="contact-content">
+                        <div class="contact-info glass-card">
+                            <h3>Let's Build Something Amazing Together</h3>
+                            <p>I'm currently open to new opportunities and always interested in hearing about exciting projects. Whether you want to collaborate or just say hi, feel free to reach out!</p>
+                            
+                            <div class="contact-methods">
+                                <a href="mailto:devanshbhardwaj375@gmail.com" class="contact-method" id="contactEmail">
+                                    <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                                    <div class="contact-detail">
+                                        <span class="contact-label">Email</span>
+                                        <span class="contact-value">devanshbhardwaj375@gmail.com</span>
+                                    </div>
+                                </a>
+                                <a href="tel:+919509033142" class="contact-method" id="contactPhone">
+                                    <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
+                                    <div class="contact-detail">
+                                        <span class="contact-label">Phone</span>
+                                        <span class="contact-value">+91-9509033142</span>
+                                    </div>
+                                </a>
+                                <a href="https://www.linkedin.com/in/devansh-bhardwaj-b82632324/" target="_blank" class="contact-method" id="contactLinkedin">
+                                    <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+                                    <div class="contact-detail">
+                                        <span class="contact-label">LinkedIn</span>
+                                        <span class="contact-value">linkedin.com/in/devansh-bhardwaj-b82632324</span>
+                                    </div>
+                                </a>
+                                <a href="https://orbnet.in" target="_blank" class="contact-method" id="contactOrbnet">
+                                    <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+                                    <div class="contact-detail">
+                                        <span class="contact-label">Website</span>
+                                        <span class="contact-value">orbnet.in</span>
+                                    </div>
+                                </a>
+                                <div class="contact-method" id="contactLocation">
+                                    <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                                    <div class="contact-detail">
+                                        <span class="contact-label">Location</span>
+                                        <span class="contact-value">Jaipur, Rajasthan, India</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-cta glass-card">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            <h3>Ready to collaborate?</h3>
+                            <p>I'm always excited to work on new and challenging projects. Let's create something that makes a difference!</p>
+                            <a href="mailto:devanshbhardwaj375@gmail.com" class="btn btn-primary btn-large" id="btnSendEmail">
+                                <span>Send Me an Email</span>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="footer">
+                        <div class="footer-content">
+                            <p>Designed & Built by <strong>Devansh Bhardwaj</strong></p>
+                            <p class="footer-note">vibe coded with intention · 2026</p>
+                        </div>
+                    </div>
+
+                    <span class="section-tag section-tag-end">&lt;/contact&gt;</span>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Status bar -->
+        <div class="browser-statusbar">
+            <span class="status-left">
+                <span class="vibe-badge">vibe coded</span>
+                <span class="status-text" id="statusText">Ready</span>
+            </span>
+            <span class="status-zoom">100%</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
