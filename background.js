@@ -30,7 +30,6 @@
         uniform float uRadius;    // ring radius in CSS px
         uniform vec2  uTilt;      // camera yaw / pitch (radians)
         uniform float uIntensity;
-        uniform float uDark;      // 1 on dark themes, 0 on light
         uniform float uMaxPoint;
 
         varying vec4  vColor;
@@ -107,11 +106,11 @@
             float edge = smoothstep(0.0, 1.0, (1.0 - zt) * 8.0) * smoothstep(0.0, 1.0, zt * 8.0);
 
             float hueT = fract(atan(-dir.y, dir.x) / 6.2831853 + 1.0 + uTime * 0.008);
-            vec3 dust = mix(vec3(0.32, 0.33, 0.36), vec3(0.62, 0.62, 0.66), uDark);
+            vec3 dust = vec3(0.62, 0.62, 0.66);
             float colorMix = smoothstep(0.08, 0.55, prox);
             vec3 col = mix(dust, palette(hueT), colorMix);
 
-            float alpha = mix(mix(0.28, 0.38, uDark), 0.95, colorMix);
+            float alpha = mix(0.38, 0.95, colorMix);
             alpha *= fogFar * fogNear * edge * uIntensity * mix(0.75, 1.0, aSeed.z);
 
             // --- point sprite sizing in device pixels
@@ -216,7 +215,7 @@
         }
         gl.useProgram(program);
 
-        ['uTime', 'uRes', 'uDpr', 'uSpread', 'uFocus', 'uRadius', 'uTilt', 'uIntensity', 'uDark', 'uMaxPoint']
+        ['uTime', 'uRes', 'uDpr', 'uSpread', 'uFocus', 'uRadius', 'uTilt', 'uIntensity', 'uMaxPoint']
             .forEach(n => { uniforms[n] = gl.getUniformLocation(program, n); });
 
         const range = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE);
@@ -313,7 +312,6 @@
     // ===================================================================
     function render(time) {
         const t = time * 0.001;
-        const isDark = !document.documentElement.matches('[data-theme="light"]');
 
         gl.clear(gl.COLOR_BUFFER_BIT);
         gl.uniform1f(uniforms.uTime, t);
@@ -324,7 +322,6 @@
         gl.uniform1f(uniforms.uRadius, state.radius);
         gl.uniform2f(uniforms.uTilt, state.tiltX, state.tiltY);
         gl.uniform1f(uniforms.uIntensity, reduceMotion.matches ? 0.85 : state.intensity);
-        gl.uniform1f(uniforms.uDark, isDark ? 1 : 0);
         gl.uniform1f(uniforms.uMaxPoint, maxPointSize);
         gl.drawArrays(gl.POINTS, 0, particleCount);
     }

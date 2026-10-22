@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="ink">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -29,23 +29,20 @@
         href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400..700&family=Google+Sans+Code:wght@400;500&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=14">
+    <link rel="stylesheet" href="style.css?v=15">
 </head>
 
 <body>
-    <!-- Ambient Multichromatic AI Aurora Background -->
-    <div class="ai-ambient-backdrop" id="ambientBackdrop">
-        <div class="aurora-orb aurora-1"></div>
-        <div class="aurora-orb aurora-2"></div>
-        <div class="aurora-orb aurora-3"></div>
-        <div class="aurora-grid"></div>
+    <!-- Dot grid: shown only if WebGL is unavailable -->
+    <div class="ambient-backdrop">
+        <div class="dot-grid"></div>
     </div>
 
     <!-- 3D Liftoff Particle Field (WebGL, see background.js) -->
     <canvas id="particlesCanvas" aria-hidden="true"></canvas>
 
     <!-- Main AI App Container -->
-    <div class="ai-app-layout" id="appLayout">
+    <div class="app-layout" id="appLayout">
 
         <!-- Mobile drawer backdrop -->
         <div class="drawer-scrim" id="drawerScrim" aria-hidden="true"></div>
@@ -63,7 +60,7 @@
                 <svg class="brand-mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><g stroke-width="2.6" stroke-linecap="round"><line x1="16.0" y1="8.5" x2="16.0" y2="3.5" stroke="#4285f4"/><line x1="19.8" y1="9.5" x2="22.2" y2="5.2" stroke="#6b6cf5"/><line x1="22.5" y1="12.2" x2="26.8" y2="9.8" stroke="#9461f7"/><line x1="23.5" y1="16.0" x2="28.5" y2="16.0" stroke="#c14fa0"/><line x1="22.5" y1="19.8" x2="26.8" y2="22.2" stroke="#ed4a6e"/><line x1="19.8" y1="22.5" x2="22.2" y2="26.8" stroke="#f38a3d"/><line x1="16.0" y1="23.5" x2="16.0" y2="28.5" stroke="#fabd14"/><line x1="12.3" y1="22.5" x2="9.8" y2="26.8" stroke="#f6a225"/><line x1="9.5" y1="19.8" x2="5.2" y2="22.3" stroke="#f56a2e"/><line x1="8.5" y1="16.0" x2="3.5" y2="16.0" stroke="#e8503f"/><line x1="9.5" y1="12.2" x2="5.2" y2="9.7" stroke="#a35fd0"/><line x1="12.2" y1="9.5" x2="9.7" y2="5.2" stroke="#4f7cf0"/></g><circle cx="16" cy="16" r="2.4" fill="#f3f1ec"/></svg>
                 <span class="brand-text">Devan <span class="brand-text-sub">· Devansh's AI twin</span></span>
             </div>
-            <button class="mobile-artifacts-btn" id="mobileArtifactsBtn" title="Projects & credentials" aria-label="Open projects panel">
+            <button class="mobile-work-btn" id="mobileWorkBtn" title="Projects & credentials" aria-label="Open projects panel">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="3" width="18" height="18" rx="2"></rect>
                     <line x1="9" y1="3" x2="9" y2="21"></line>
@@ -72,12 +69,12 @@
         </header>
 
 
-        <aside class="ai-sidebar" id="aiSidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="ai-logo-group">
+                <div class="brand-group">
                     <svg class="brand-mark" viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><g stroke-width="2.6" stroke-linecap="round"><line x1="16.0" y1="8.5" x2="16.0" y2="3.5" stroke="#4285f4"/><line x1="19.8" y1="9.5" x2="22.2" y2="5.2" stroke="#6b6cf5"/><line x1="22.5" y1="12.2" x2="26.8" y2="9.8" stroke="#9461f7"/><line x1="23.5" y1="16.0" x2="28.5" y2="16.0" stroke="#c14fa0"/><line x1="22.5" y1="19.8" x2="26.8" y2="22.2" stroke="#ed4a6e"/><line x1="19.8" y1="22.5" x2="22.2" y2="26.8" stroke="#f38a3d"/><line x1="16.0" y1="23.5" x2="16.0" y2="28.5" stroke="#fabd14"/><line x1="12.3" y1="22.5" x2="9.8" y2="26.8" stroke="#f6a225"/><line x1="9.5" y1="19.8" x2="5.2" y2="22.3" stroke="#f56a2e"/><line x1="8.5" y1="16.0" x2="3.5" y2="16.0" stroke="#e8503f"/><line x1="9.5" y1="12.2" x2="5.2" y2="9.7" stroke="#a35fd0"/><line x1="12.2" y1="9.5" x2="9.7" y2="5.2" stroke="#4f7cf0"/></g><circle cx="16" cy="16" r="2.4" fill="#f3f1ec"/></svg>
-                    <div class="ai-logo-meta">
-                        <h1 class="ai-logo-title">Devan
+                    <div class="brand-meta">
+                        <h1 class="brand-title">Devan
                             <button class="brand-info" type="button" aria-describedby="brandHint"
                                 aria-label="What is Devan?">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -91,7 +88,7 @@
                                     words.</span>
                             </button>
                         </h1>
-                        <span class="ai-logo-sub">Devansh's AI twin</span>
+                        <span class="brand-sub">Devansh's AI twin</span>
                     </div>
                 </div>
                 <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" title="Collapse sidebar"
@@ -159,7 +156,7 @@
                 </nav>
 
                 <!-- Developer Bio Specs Card -->
-                <div class="agent-specs-card">
+                <div class="profile-card">
                     <div class="specs-row">
                         <span class="specs-label">Status</span>
                         <span class="specs-val status-online"><span class="pulse-dot"></span> Open to roles</span>
@@ -182,9 +179,9 @@
                 <div class="avatar-sidebar-controls">
                     <div class="nav-section-label">Profile photo</div>
                     <div class="avatar-mode-pills">
-                        <button class="avatar-pill active" id="btnSideAvatarBridge" data-avatar="bridge">Photo</button>
-                        <button class="avatar-pill" id="btnSideAvatarCutout" data-avatar="cutout">Cutout</button>
-                        <button class="avatar-pill" id="btnSideAvatar3D" data-avatar="3d">3D</button>
+                        <button class="avatar-pill active" data-avatar="bridge">Photo</button>
+                        <button class="avatar-pill" data-avatar="cutout">Cutout</button>
+                        <button class="avatar-pill" data-avatar="3d">3D</button>
                     </div>
                 </div>
             </div>
@@ -202,7 +199,7 @@
                         <span class="profile-name">Devansh Bhardwaj</span>
                         <span class="profile-role">Founder @ Orbnet</span>
                     </div>
-                    <button class="profile-more-btn" title="Contact options" aria-label="Contact options" id="profileSettingsBtn">
+                    <button class="profile-more-btn" title="Contact options" aria-label="Contact options">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <circle cx="12" cy="12" r="1"></circle>
@@ -215,10 +212,10 @@
         </aside>
 
         <!-- Center Workspace / Conversation Stage -->
-        <main class="ai-main-stage" id="mainStage">
+        <main class="main-stage" id="mainStage">
 
             <!-- Top AI Workspace App Bar -->
-            <header class="ai-top-bar">
+            <header class="top-bar">
                 <div class="top-bar-left">
                     <!-- Re-open sidebar (desktop, when collapsed) -->
                     <button class="top-icon-btn sidebar-expand-btn" id="sidebarExpandBtn" title="Open sidebar"
@@ -231,32 +228,32 @@
                     </button>
 
                     <!-- Audience selector: tailors each answer to who is reading -->
-                    <div class="model-selector-wrapper" id="modelSelectorWrapper">
-                        <button class="model-selector-btn" id="modelSelectorBtn" aria-haspopup="listbox"
+                    <div class="audience-selector" id="audienceSelector">
+                        <button class="audience-btn" id="audienceBtn" aria-haspopup="listbox"
                             aria-expanded="false">
-                            <span class="model-prefix">Answers for</span>
-                            <span class="model-name" id="currentModelName">Recruiter</span>
+                            <span class="audience-prefix">Answers for</span>
+                            <span class="audience-name" id="currentAudienceName">Recruiter</span>
                             <svg class="chevron-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
                                 stroke="currentColor" stroke-width="2">
                                 <polyline points="6 9 12 15 18 9"></polyline>
                             </svg>
                         </button>
 
-                        <div class="model-dropdown-menu" id="modelDropdownMenu" role="listbox">
+                        <div class="audience-menu" role="listbox">
                             <p class="dd-heading">Who's reading?</p>
-                            <div class="dropdown-item active" data-model="Recruiter">
+                            <div class="dropdown-item active" data-audience="Recruiter">
                                 <span class="dd-item-title">Recruiter</span>
                                 <p class="dd-item-sub">The straight facts: background, work, results</p>
                             </div>
-                            <div class="dropdown-item" data-model="Engineer">
+                            <div class="dropdown-item" data-audience="Engineer">
                                 <span class="dd-item-title">Engineer</span>
                                 <p class="dd-item-sub">Adds how I think about code, C++ and DSA</p>
                             </div>
-                            <div class="dropdown-item" data-model="Founder">
+                            <div class="dropdown-item" data-audience="Founder">
                                 <span class="dd-item-title">Founder</span>
                                 <p class="dd-item-sub">Adds the startup angle: Orbnet, partners, growth</p>
                             </div>
-                            <div class="dropdown-item" data-model="Creator">
+                            <div class="dropdown-item" data-audience="Creator">
                                 <span class="dd-item-title">Creator</span>
                                 <p class="dd-item-sub">Adds my YouTube channel</p>
                             </div>
@@ -273,7 +270,7 @@
                 <div class="top-bar-right">
                     <!-- Audio Sound Effects Toggle -->
                     <button class="top-icon-btn" id="audioToggleBtn" title="Toggle Sound Effects" aria-label="Toggle sound effects" aria-pressed="true">
-                        <svg id="soundOnIcon" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2">
                             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                             <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -281,18 +278,18 @@
                     </button>
 
                     <!-- Projects & credentials panel -->
-                    <button class="artifacts-toggle-btn" id="artifactsToggleBtn" title="Projects & credentials">
+                    <button class="work-toggle-btn" id="workToggleBtn" title="Projects & credentials">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                             <line x1="9" y1="3" x2="9" y2="21"></line>
                         </svg>
                         <span class="btn-text">Work</span>
-                        <span class="artifact-count-badge" id="artifactCountBadge">5</span>
+                        <span class="work-count-badge">5</span>
                     </button>
 
                     <!-- Direct Connect / Contact Button -->
-                    <a href="mailto:devanshbhardwaj375@gmail.com" class="hire-cta-pill" id="quickHireBtn">
+                    <a href="mailto:devanshbhardwaj375@gmail.com" class="hire-cta-pill">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path>
@@ -306,7 +303,7 @@
             <div class="chat-viewport" id="chatViewport">
 
                 <!-- Welcome Hero Screen (Displayed initially) -->
-                <div class="ai-welcome-hero" id="welcomeHero">
+                <div class="welcome-hero" id="welcomeHero">
 
                     <!-- Profile Avatar Centerpiece (3D orbit) -->
                     <div class="hero-avatar-portal reveal" style="--d: 0" id="heroAvatarPortal">
@@ -340,7 +337,7 @@
                         <p class="hero-subtitle reveal" style="--d: 4">
                             I'm Devansh Bhardwaj — a second-year B.Tech CSE student at GIT Jaipur (affiliated to RTU
                             Kota). I founded Orbnet, built client websites during a paid internship at Palarsoft, and
-                            have built several websites as a freelancer.
+                            do freelance projects.
                         </p>
                         <div class="hero-cta-row reveal" style="--d: 5">
                             <button class="hero-cta primary" id="heroProjectsBtn" type="button">
@@ -425,16 +422,14 @@
                     <!-- Dynamic chat messages will be appended here -->
                 </div>
 
-                <!-- Invisible scroll anchor -->
-                <div id="chatBottomAnchor"></div>
             </div>
 
             <!-- Floating Input Capsule (Dock) -->
-            <div class="ai-input-dock-wrapper">
-                <div class="ai-input-dock" id="aiInputDock">
+            <div class="input-dock-wrapper">
+                <div class="input-dock">
 
                     <!-- Quick Mode Pill Selector -->
-                    <div class="dock-quick-tags" id="dockQuickTags">
+                    <div class="dock-quick-tags">
                         <button class="quick-tag active" data-query="Overview">Overview</button>
                         <button class="quick-tag" data-query="Projects">Projects</button>
                         <button class="quick-tag" data-query="Experience">Experience</button>
@@ -452,7 +447,7 @@
                             </svg>
                         </button>
 
-                        <textarea id="aiPromptInput" class="ai-prompt-textarea" rows="1" aria-label="Ask a question"
+                        <textarea id="promptInput" class="prompt-input" rows="1" aria-label="Ask a question"
                             placeholder="Ask Devan anything about Devansh…"
                             autocomplete="off" spellcheck="false"></textarea>
 
@@ -485,14 +480,14 @@
         </main>
 
         <!-- Right side panel: projects, certificate, skills, contact -->
-        <aside class="ai-artifacts-canvas" id="artifactsCanvas">
-            <div class="canvas-header">
-                <div class="canvas-title-group">
-                    <span class="canvas-badge">Work</span>
-                    <h3 class="canvas-title" id="canvasTitle">Projects & credentials</h3>
+        <aside class="work-panel" id="workPanel">
+            <div class="panel-header">
+                <div class="panel-title-group">
+                    <span class="panel-badge">Work</span>
+                    <h3 class="panel-title">Projects & credentials</h3>
                 </div>
-                <div class="canvas-actions">
-                    <button class="canvas-icon-btn" id="canvasExpandBtn" title="Toggle Full View" aria-label="Toggle full view">
+                <div class="panel-actions">
+                    <button class="panel-icon-btn" id="panelExpandBtn" title="Toggle Full View" aria-label="Toggle full view">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <polyline points="15 3 21 3 21 9"></polyline>
@@ -501,7 +496,7 @@
                             <line x1="3" y1="21" x2="10" y2="14"></line>
                         </svg>
                     </button>
-                    <button class="canvas-icon-btn" id="canvasCloseBtn" title="Close" aria-label="Close panel">
+                    <button class="panel-icon-btn" id="panelCloseBtn" title="Close" aria-label="Close panel">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -511,36 +506,35 @@
                 </div>
             </div>
 
-            <!-- Canvas Tabs -->
-            <div class="canvas-tabs">
-                <button class="canvas-tab active" data-canvas-tab="projects" id="tabCanvasProjects">Projects</button>
-                <button class="canvas-tab" data-canvas-tab="certificate" id="tabCanvasCert">Certificate</button>
-                <button class="canvas-tab" data-canvas-tab="skills" id="tabCanvasSkills">Skills</button>
-                <button class="canvas-tab" data-canvas-tab="contact" id="tabCanvasContact">Contact</button>
+            <!-- Panel tabs -->
+            <div class="panel-tabs">
+                <button class="panel-tab active" data-panel-tab="projects">Projects</button>
+                <button class="panel-tab" data-panel-tab="certificate">Certificate</button>
+                <button class="panel-tab" data-panel-tab="skills">Skills</button>
+                <button class="panel-tab" data-panel-tab="contact">Contact</button>
             </div>
 
-            <!-- Canvas Scrollable Body -->
-            <div class="canvas-body" id="canvasBody">
+            <!-- Panel body -->
+            <div class="panel-body">
 
                 <!-- 1. PROJECTS TAB CONTENT -->
-                <div class="canvas-pane active" id="paneProjects">
-                    <div class="artifact-card featured">
-                        <div class="artifact-media-wrap">
-                            <img src="project-orbnet.png" alt="Orbnet Platform" class="artifact-img" loading="lazy" decoding="async"
-                                onerror="this.onerror=null;this.src='project-orbnet.jpg';">
+                <div class="panel-pane active" id="paneProjects">
+                    <div class="project-card featured">
+                        <div class="project-media">
+                            <img src="project-orbnet.jpg" alt="Orbnet platform" class="project-img" loading="lazy" decoding="async">
                             <span class="live-status-pill">Founded</span>
                         </div>
-                        <div class="artifact-content">
+                        <div class="project-content">
                             <h4>Orbnet</h4>
-                            <p class="artifact-desc">Student internship discovery platform founded during 1st year of
+                            <p class="project-desc">Student internship discovery platform founded during 1st year of
                                 college. Onboarded Avichal Techno Labs (paid company), managed Google Ads, marketing
                                 operations, and platform UI.</p>
-                            <div class="artifact-tags">
+                            <div class="project-tags">
                                 <span>Startup</span><span>Full-Stack</span><span>Google
                                     Ads</span><span>Operations</span>
                             </div>
-                            <div class="artifact-actions">
-                                <a href="https://orbnet.in" target="_blank" rel="noopener noreferrer" class="artifact-btn primary">
+                            <div class="project-actions">
+                                <a href="https://orbnet.in" target="_blank" rel="noopener noreferrer" class="project-btn primary">
                                     <span>Visit orbnet.in</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2">
@@ -549,7 +543,7 @@
                                         <line x1="10" y1="14" x2="21" y2="3"></line>
                                     </svg>
                                 </a>
-                                <button class="artifact-btn secondary ask-about-btn"
+                                <button class="project-btn secondary ask-about-btn"
                                     data-ask="What is the story behind founding Orbnet?">
                                     Ask about this
                                 </button>
@@ -557,26 +551,26 @@
                         </div>
                     </div>
 
-                    <div class="artifact-card">
-                        <div class="artifact-media-wrap poster">
+                    <div class="project-card">
+                        <div class="project-media poster">
                             <img src="hackathon-paradise.jpg" alt="Hackathon Paradise poster, presented by Orbnet"
-                                class="artifact-img" loading="lazy" decoding="async">
+                                class="project-img" loading="lazy" decoding="async">
                             <span class="live-status-pill">Organised</span>
                         </div>
-                        <div class="artifact-content">
+                        <div class="project-content">
                             <span class="sub-badge">Presented by Orbnet</span>
                             <h4>Hackathon Paradise</h4>
-                            <p class="artifact-desc">A 12-hour online hackathon I organised through Orbnet on 11
+                            <p class="project-desc">A 12-hour online hackathon I organised through Orbnet on 11
                                 October. Teams of 1–4, a ₹10K prize pool, and three rounds: PPT, prototype and a
                                 mega final.</p>
-                            <div class="artifact-tags">
+                            <div class="project-tags">
                                 <span>Online</span><span>12 hours</span><span>₹10K pool</span><span>4 sponsors</span>
                             </div>
-                            <div class="artifact-actions">
-                                <button class="artifact-btn primary view-poster-btn" data-src="hackathon-paradise.jpg">
+                            <div class="project-actions">
+                                <button class="project-btn primary view-poster-btn" data-src="hackathon-paradise.jpg">
                                     View poster
                                 </button>
-                                <button class="artifact-btn secondary ask-about-btn"
+                                <button class="project-btn secondary ask-about-btn"
                                     data-ask="Tell me about Hackathon Paradise.">
                                     Ask about this
                                 </button>
@@ -584,24 +578,23 @@
                         </div>
                     </div>
 
-                    <div class="artifact-card featured">
-                        <div class="artifact-media-wrap">
-                            <img src="project-library.png" alt="Vidhyasthali Library" class="artifact-img" loading="lazy" decoding="async"
-                                onerror="this.onerror=null;this.src='project-library.jpg';">
+                    <div class="project-card featured">
+                        <div class="project-media">
+                            <img src="project-library.jpg" alt="Vidhyasthali Library" class="project-img" loading="lazy" decoding="async">
                             <span class="live-status-pill">Live</span>
                         </div>
-                        <div class="artifact-content">
+                        <div class="project-content">
                             <span class="sub-badge">Freelance project</span>
                             <h4>Vidhyasthali Library</h4>
-                            <p class="artifact-desc">Website I designed and built for a library and reading hall in
+                            <p class="project-desc">Website I designed and built for a library and reading hall in
                                 Barmer, Rajasthan: the 32+ desk AC reading hall, 12+ classic Hindi and English books
                                 to read free online, no sign-up, responsive layout and SEO.</p>
-                            <div class="artifact-tags">
+                            <div class="project-tags">
                                 <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>SEO</span>
                             </div>
-                            <div class="artifact-actions">
+                            <div class="project-actions">
                                 <a href="https://www.vidhyasthalilibrary.online/" target="_blank" rel="noopener noreferrer"
-                                    class="artifact-btn primary">
+                                    class="project-btn primary">
                                     <span>Visit Live Site</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2">
@@ -610,7 +603,7 @@
                                         <line x1="10" y1="14" x2="21" y2="3"></line>
                                     </svg>
                                 </a>
-                                <button class="artifact-btn secondary ask-about-btn"
+                                <button class="project-btn secondary ask-about-btn"
                                     data-ask="Tell me more technical details about the Vidhyasthali Library project.">
                                     Ask about this
                                 </button>
@@ -618,37 +611,37 @@
                         </div>
                     </div>
 
-                    <div class="artifact-card">
-                        <div class="artifact-media-wrap">
-                            <img src="project-blog.jpg" alt="Client Multi-Page Blog Platform" class="artifact-img" loading="lazy" decoding="async"
+                    <div class="project-card">
+                        <div class="project-media">
+                            <img src="project-blog.jpg" alt="Client Multi-Page Blog Platform" class="project-img" loading="lazy" decoding="async"
                                 onerror="this.parentElement.style.background='linear-gradient(135deg, #1e293b, #334155)';">
                             <span class="live-status-pill">Client work</span>
                         </div>
-                        <div class="artifact-content">
+                        <div class="project-content">
                             <span class="sub-badge">Palarsoft internship</span>
                             <h4>Client blog platform</h4>
-                            <p class="artifact-desc">Production-ready blog system engineered during paid internship at
+                            <p class="project-desc">Production-ready blog system engineered during paid internship at
                                 Palarsoft Internet Pvt. Ltd. Features clean
                                 UI, modular styles, and responsive layout.</p>
-                            <div class="artifact-tags">
+                            <div class="project-tags">
                                 <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Bootstrap</span>
                             </div>
-                            <button class="artifact-btn secondary ask-about-btn"
+                            <button class="project-btn secondary ask-about-btn"
                                 data-ask="Explain what you built at Palarsoft Internet.">
                                 Ask about this
                             </button>
                         </div>
                     </div>
 
-                    <div class="artifact-card">
-                        <div class="artifact-media-wrap">
-                            <img src="project-algorithm.jpg" alt="Algorithm Soft YouTube channel" class="artifact-img" loading="lazy" decoding="async"
+                    <div class="project-card">
+                        <div class="project-media">
+                            <img src="project-algorithm.jpg" alt="Algorithm Soft YouTube channel" class="project-img" loading="lazy" decoding="async"
                                 onerror="this.parentElement.style.background='linear-gradient(135deg, #991b1b, #ef4444)';">
                             <span class="live-status-pill">YouTube</span>
                         </div>
-                        <div class="artifact-content">
+                        <div class="project-content">
                             <h4>Algorithm Soft</h4>
-                            <p class="artifact-desc">A YouTube channel where I make educational programming
+                            <p class="project-desc">A YouTube channel where I make educational programming
                                 videos.</p>
                             <div class="yt-grid">
                                 <a class="yt-video" href="https://www.youtube.com/watch?v=8cXKNMIJSi8" target="_blank"
@@ -688,12 +681,12 @@
                                     <span class="yt-title">How to eat food in a FAANG company with the help of DSA</span>
                                 </a>
                             </div>
-                            <div class="artifact-tags">
+                            <div class="project-tags">
                                 <span>YouTube</span><span>Programming</span>
                             </div>
-                            <div class="artifact-actions">
+                            <div class="project-actions">
                                 <a href="https://www.youtube.com/@algorithmsoft" target="_blank" rel="noopener noreferrer"
-                                    class="artifact-btn primary">
+                                    class="project-btn primary">
                                     <span>Visit channel</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2">
@@ -702,7 +695,7 @@
                                         <line x1="10" y1="14" x2="21" y2="3"></line>
                                     </svg>
                                 </a>
-                                <button class="artifact-btn secondary ask-about-btn"
+                                <button class="project-btn secondary ask-about-btn"
                                     data-ask="Tell me about your YouTube channel, Algorithm Soft.">
                                     Ask about this
                                 </button>
@@ -712,7 +705,7 @@
                 </div>
 
                 <!-- 2. CERTIFICATE TAB CONTENT -->
-                <div class="canvas-pane" id="paneCertificate">
+                <div class="panel-pane" id="paneCertificate">
                     <div class="cert-display-card">
                         <div class="cert-status-banner">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34A853"
@@ -724,7 +717,7 @@
                         <div class="cert-image-frame" id="certImageFrame">
                             <img src="palarsoft-certificate.jpg"
                                 alt="Palarsoft Frontend Developer Internship Certificate - Devansh Bhardwaj"
-                                class="cert-full-img" id="certFullImg" loading="lazy" decoding="async">
+                                class="cert-full-img" loading="lazy" decoding="async">
                             <div class="cert-hover-zoom-hint">Click image to enlarge</div>
                         </div>
                         <div class="cert-meta-details">
@@ -751,7 +744,7 @@
                         </div>
                         <div class="cert-actions">
                             <a href="palarsoft-certificate.jpg" download="Devansh_Bhardwaj_Palarsoft_Certificate.jpg"
-                                class="artifact-btn primary">
+                                class="project-btn primary">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                     stroke-width="2">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -765,7 +758,7 @@
                 </div>
 
                 <!-- 3. SKILLS MATRIX TAB CONTENT -->
-                <div class="canvas-pane" id="paneSkills">
+                <div class="panel-pane" id="paneSkills">
                     <div class="skills-matrix-wrap">
                         <div class="matrix-group">
                             <h4 class="matrix-heading">Frontend and problem solving</h4>
@@ -938,13 +931,13 @@
                 </div>
 
                 <!-- 4. CONTACT TAB CONTENT -->
-                <div class="canvas-pane" id="paneContact">
+                <div class="panel-pane" id="paneContact">
                     <div class="contact-card-inspector">
                         <h4>Let's work together</h4>
                         <p class="contact-sub">I'm open to frontend roles, internships and collaborations. Email is the quickest way to reach me.</p>
 
                         <div class="contact-methods-stack">
-                            <a href="mailto:devanshbhardwaj375@gmail.com" class="c-method-btn" id="canvasEmailLink">
+                            <a href="mailto:devanshbhardwaj375@gmail.com" class="c-method-btn">
                                 <div class="c-method-icon" style="background: rgba(234,67,53,0.15); color: #ea4335;">
                                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2">
@@ -1033,13 +1026,13 @@
             </div>
         </aside>
 
-    </div><!-- end .ai-app-layout -->
+    </div><!-- end .app-layout -->
 
     <!-- Image Modal (For full-screen certificate or preview zoom) -->
-    <div class="ai-modal-overlay" id="imageModalOverlay" role="dialog" aria-modal="true" aria-label="Image preview">
-        <div class="ai-modal-container">
-            <button class="ai-modal-close" id="imageModalClose" aria-label="Close preview">&times;</button>
-            <div class="ai-modal-content">
+    <div class="modal-overlay" id="imageModalOverlay" role="dialog" aria-modal="true" aria-label="Image preview">
+        <div class="modal-container">
+            <button class="modal-close" id="imageModalClose" aria-label="Close preview">&times;</button>
+            <div class="modal-content">
                 <img src="palarsoft-certificate.jpg" alt="Enlarged View" id="modalEnlargedImg"
                     class="modal-enlarged-img">
             </div>
@@ -1047,14 +1040,14 @@
     </div>
 
     <!-- Toast Notification -->
-    <div class="ai-toast" id="aiToast" role="status" aria-live="polite">
+    <div class="toast" id="toast" role="status" aria-live="polite">
         <span class="toast-sparkle" aria-hidden="true"></span>
         <span class="toast-message" id="toastMessage"></span>
     </div>
 
     <!-- Main JavaScript Logic -->
-    <script src="background.js?v=14"></script>
-    <script src="script.js?v=14"></script>
+    <script src="background.js?v=15"></script>
+    <script src="script.js?v=15"></script>
 </body>
 
 </html>

@@ -11,12 +11,7 @@
     // WRITTEN ANSWERS
     // ===================================================================
     const KNOWLEDGE_BASE = {
-        name: "Devansh Bhardwaj",
         email: "devanshbhardwaj375@gmail.com",
-        linkedin: "https://www.linkedin.com/in/devansh-bhardwaj-b82632324/",
-        orbnetUrl: "https://orbnet.in",
-        libraryUrl: "https://www.vidhyasthalilibrary.online/",
-        youtubeUrl: "https://www.youtube.com/@algorithmsoft",
 
         about: `I'm a second-year B.Tech CSE student at Global Institute of Technology (GIT), Jaipur, affiliated to Rajasthan Technical University (RTU), Kota. In my first year I started **Orbnet**, an internship discovery platform for students, and signed Avichal Techno Labs as our first paying client. I also spent three months as a paid frontend developer intern at **Palarsoft Internet Pvt. Ltd.**, building client websites and working on AI video pipelines.
 
@@ -137,40 +132,37 @@ Some things you could ask about:
     const chatViewport = document.getElementById('chatViewport');
     const chatMessagesStream = document.getElementById('chatMessagesStream');
     const welcomeHero = document.getElementById('welcomeHero');
-    const aiPromptInput = document.getElementById('aiPromptInput');
+    const promptInput = document.getElementById('promptInput');
     const dockSendBtn = document.getElementById('dockSendBtn');
-    const chatBottomAnchor = document.getElementById('chatBottomAnchor');
 
-    // Sidebar & Canvas Controls
-    const aiSidebar = document.getElementById('aiSidebar');
+    // Sidebar & work panel
+    const sidebar = document.getElementById('sidebar');
     const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const newChatBtn = document.getElementById('newChatBtn');
-    const artifactsCanvas = document.getElementById('artifactsCanvas');
-    const artifactsToggleBtn = document.getElementById('artifactsToggleBtn');
-    const mobileArtifactsBtn = document.getElementById('mobileArtifactsBtn');
-    const canvasCloseBtn = document.getElementById('canvasCloseBtn');
-    const canvasExpandBtn = document.getElementById('canvasExpandBtn');
+    const workPanel = document.getElementById('workPanel');
+    const workToggleBtn = document.getElementById('workToggleBtn');
+    const mobileWorkBtn = document.getElementById('mobileWorkBtn');
+    const panelCloseBtn = document.getElementById('panelCloseBtn');
+    const panelExpandBtn = document.getElementById('panelExpandBtn');
     const dockAttachBtn = document.getElementById('dockAttachBtn');
 
-    // Models & Themes
-    const modelSelectorWrapper = document.getElementById('modelSelectorWrapper');
-    const modelSelectorBtn = document.getElementById('modelSelectorBtn');
-    const currentModelName = document.getElementById('currentModelName');
-    const modelDropdownMenu = document.getElementById('modelDropdownMenu');
+    // Audience selector & sound
+    const audienceSelector = document.getElementById('audienceSelector');
+    const audienceBtn = document.getElementById('audienceBtn');
+    const currentAudienceName = document.getElementById('currentAudienceName');
     const audioToggleBtn = document.getElementById('audioToggleBtn');
-    const themePicker = document.getElementById('themePicker');
 
     // Modals & Toasts
     const imageModalOverlay = document.getElementById('imageModalOverlay');
     const imageModalClose = document.getElementById('imageModalClose');
     const modalEnlargedImg = document.getElementById('modalEnlargedImg');
-    const aiToast = document.getElementById('aiToast');
+    const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
 
-    // Canvas Tabs
-    const canvasTabs = document.querySelectorAll('.canvas-tab');
-    const canvasPanes = document.querySelectorAll('.canvas-pane');
+    // Panel tabs
+    const panelTabs = document.querySelectorAll('.panel-tab');
+    const panelPanes = document.querySelectorAll('.panel-pane');
 
     // Storage can throw in private mode or with site data blocked; never let it break the page
     const store = {
@@ -185,10 +177,10 @@ Some things you could ask about:
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const DESKTOP_MIN = 900;
-    const CANVAS_DOCK_MIN = 1200;
+    const PANEL_DOCK_MIN = 1200;
 
     // State Variables
-    let currentModel = "Recruiter";
+    let currentAudience = "Recruiter";
     let isStreaming = false;
     let streamTimer = null;
     let audioMuted = store.get('devansh_audio_muted') === '1';
@@ -249,12 +241,12 @@ Some things you could ask about:
     // ===================================================================
     let toastTimeout;
     function showToast(msg) {
-        if (!aiToast || !toastMessage) return;
+        if (!toast || !toastMessage) return;
         toastMessage.textContent = msg;
-        aiToast.classList.add('show');
+        toast.classList.add('show');
         clearTimeout(toastTimeout);
         toastTimeout = setTimeout(() => {
-            aiToast.classList.remove('show');
+            toast.classList.remove('show');
         }, 2800);
     }
 
@@ -291,7 +283,7 @@ Some things you could ask about:
             btn.classList.toggle('active', btn.dataset.avatar === activeAvatar);
         });
 
-        document.querySelectorAll('#sidebarAvatarImg, #heroAvatarImg, .agent-thumb-avatar').forEach(img => {
+        document.querySelectorAll('#sidebarAvatarImg, #heroAvatarImg, .reply-avatar-img').forEach(img => {
             delete img.dataset.fallback;
             img.style.visibility = '';
             img.src = targetSrc;
@@ -315,78 +307,53 @@ Some things you could ask about:
     });
 
     // ===================================================================
-    // THEMES & MODEL MANAGEMENT
+    // AUDIENCE SELECTOR & SOUND
     // ===================================================================
-    const THEME_NAMES = {
-        'ink': 'Ink'
-    };
-
-    function setTheme(theme, silent) {
-        const activeTheme = THEME_NAMES[theme] ? theme : 'ink';
-        document.documentElement.setAttribute('data-theme', activeTheme);
-        store.set('portfolio-agent-theme', activeTheme);
-        document.querySelectorAll('.theme-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.theme === activeTheme);
-        });
-        if (!silent) showToast(`Theme: ${THEME_NAMES[activeTheme] || activeTheme}`);
+    // Audience selector dropdown
+    function setAudienceMenu(open) {
+        if (!audienceSelector) return;
+        audienceSelector.classList.toggle('open', open);
+        if (audienceBtn) audienceBtn.setAttribute('aria-expanded', String(open));
     }
 
-    setTheme(store.get('portfolio-agent-theme') || 'ink', true);
-
-    if (themePicker) {
-        themePicker.querySelectorAll('.theme-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                setTheme(this.dataset.theme);
-                playAudioChime('click');
-            });
-        });
-    }
-
-    // Model Selector Dropdown
-    function setModelMenu(open) {
-        if (!modelSelectorWrapper) return;
-        modelSelectorWrapper.classList.toggle('open', open);
-        if (modelSelectorBtn) modelSelectorBtn.setAttribute('aria-expanded', String(open));
-    }
-
-    if (modelSelectorBtn) {
-        modelSelectorBtn.addEventListener('click', (e) => {
+    if (audienceBtn) {
+        audienceBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            setModelMenu(!modelSelectorWrapper.classList.contains('open'));
+            setAudienceMenu(!audienceSelector.classList.contains('open'));
             playAudioChime('click');
         });
     }
 
-    function selectModel(item) {
+    function selectAudience(item) {
         document.querySelectorAll('.dropdown-item').forEach(i => {
             i.classList.remove('active');
             i.setAttribute('aria-selected', 'false');
         });
         item.classList.add('active');
         item.setAttribute('aria-selected', 'true');
-        currentModel = item.dataset.model;
-        currentModelName.textContent = currentModel;
-        setModelMenu(false);
+        currentAudience = item.dataset.audience;
+        currentAudienceName.textContent = currentAudience;
+        setAudienceMenu(false);
         playAudioChime('click');
-        showToast(`Answers now written for a ${currentModel.toLowerCase()}`);
+        showToast(`Answers now written for a ${currentAudience.toLowerCase()}`);
     }
 
     document.querySelectorAll('.dropdown-item').forEach(item => {
         item.setAttribute('role', 'option');
         item.setAttribute('tabindex', '0');
         item.setAttribute('aria-selected', String(item.classList.contains('active')));
-        item.addEventListener('click', () => selectModel(item));
+        item.addEventListener('click', () => selectAudience(item));
         item.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                selectModel(item);
-                modelSelectorBtn.focus();
+                selectAudience(item);
+                audienceBtn.focus();
             }
         });
     });
 
     document.addEventListener('click', (e) => {
-        if (!e.target.closest('#modelSelectorWrapper')) setModelMenu(false);
+        if (!e.target.closest('#audienceSelector')) setAudienceMenu(false);
     });
 
     // Audio Sound FX toggle
@@ -432,59 +399,59 @@ Some things you could ask about:
     // ===================================================================
     // SIDE PANEL (projects, certificate, skills, contact)
     // ===================================================================
-    function openCanvas(tabName = 'projects') {
-        if (artifactsCanvas) {
-            artifactsCanvas.classList.remove('closed');
-            artifactsCanvas.removeAttribute('inert');
-            if (artifactsToggleBtn) artifactsToggleBtn.classList.add('active');
-            switchCanvasTab(tabName);
-            // Canvas overlays the chat below the docking breakpoint, so the sidebar drawer gives way
-            if (window.innerWidth < CANVAS_DOCK_MIN) closeSidebarDrawer();
+    function openPanel(tabName = 'projects') {
+        if (workPanel) {
+            workPanel.classList.remove('closed');
+            workPanel.removeAttribute('inert');
+            if (workToggleBtn) workToggleBtn.classList.add('active');
+            switchPanelTab(tabName);
+            // The panel overlays the chat below the docking breakpoint, so the sidebar drawer gives way
+            if (window.innerWidth < PANEL_DOCK_MIN) closeSidebarDrawer();
             syncScrim();
         }
     }
 
-    function closeCanvas() {
-        if (artifactsCanvas) {
-            artifactsCanvas.classList.add('closed');
-            artifactsCanvas.setAttribute('inert', '');
-            if (artifactsToggleBtn) artifactsToggleBtn.classList.remove('active');
+    function closePanel() {
+        if (workPanel) {
+            workPanel.classList.add('closed');
+            workPanel.setAttribute('inert', '');
+            if (workToggleBtn) workToggleBtn.classList.remove('active');
             syncScrim();
         }
     }
 
-    function toggleCanvas() {
-        if (artifactsCanvas.classList.contains('closed')) {
-            openCanvas();
+    function togglePanel() {
+        if (workPanel.classList.contains('closed')) {
+            openPanel();
         } else {
-            closeCanvas();
+            closePanel();
         }
     }
 
-    function switchCanvasTab(tabName) {
-        canvasTabs.forEach(tab => {
-            tab.classList.toggle('active', tab.dataset.canvasTab === tabName);
+    function switchPanelTab(tabName) {
+        panelTabs.forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.panelTab === tabName);
         });
-        canvasPanes.forEach(pane => {
+        panelPanes.forEach(pane => {
             pane.classList.toggle('active', pane.id === `pane${tabName.charAt(0).toUpperCase() + tabName.slice(1)}`);
         });
     }
 
-    canvasTabs.forEach(tab => {
+    panelTabs.forEach(tab => {
         tab.addEventListener('click', function () {
-            switchCanvasTab(this.dataset.canvasTab);
+            switchPanelTab(this.dataset.panelTab);
             playAudioChime('click');
         });
     });
 
-    if (artifactsToggleBtn) artifactsToggleBtn.addEventListener('click', toggleCanvas);
-    if (mobileArtifactsBtn) mobileArtifactsBtn.addEventListener('click', toggleCanvas);
-    if (canvasCloseBtn) canvasCloseBtn.addEventListener('click', closeCanvas);
-    if (dockAttachBtn) dockAttachBtn.addEventListener('click', () => openCanvas('projects'));
+    if (workToggleBtn) workToggleBtn.addEventListener('click', togglePanel);
+    if (mobileWorkBtn) mobileWorkBtn.addEventListener('click', togglePanel);
+    if (panelCloseBtn) panelCloseBtn.addEventListener('click', closePanel);
+    if (dockAttachBtn) dockAttachBtn.addEventListener('click', () => openPanel('projects'));
 
-    if (canvasExpandBtn) {
-        canvasExpandBtn.addEventListener('click', () => {
-            artifactsCanvas.classList.toggle('expanded');
+    if (panelExpandBtn) {
+        panelExpandBtn.addEventListener('click', () => {
+            workPanel.classList.toggle('expanded');
         });
     }
 
@@ -546,8 +513,8 @@ Some things you could ask about:
         btn.addEventListener('click', function () {
             const prompt = this.dataset.ask;
             if (prompt) {
-                // Below the docking breakpoint the canvas covers the chat, so close it to show the answer
-                if (window.innerWidth < CANVAS_DOCK_MIN) closeCanvas();
+                // Below the docking breakpoint the panel covers the chat, so close it to show the answer
+                if (window.innerWidth < PANEL_DOCK_MIN) closePanel();
                 handleUserSubmit(prompt);
             }
         });
@@ -566,13 +533,13 @@ Some things you could ask about:
 
     function syncScrim() {
         if (!drawerScrim) return;
-        const drawerOpen = !isDesktop() && aiSidebar.classList.contains('open');
-        const canvasOverlay = window.innerWidth < CANVAS_DOCK_MIN && artifactsCanvas && !artifactsCanvas.classList.contains('closed');
-        drawerScrim.classList.toggle('visible', drawerOpen || canvasOverlay);
+        const drawerOpen = !isDesktop() && sidebar.classList.contains('open');
+        const panelOverlay = window.innerWidth < PANEL_DOCK_MIN && workPanel && !workPanel.classList.contains('closed');
+        drawerScrim.classList.toggle('visible', drawerOpen || panelOverlay);
     }
 
     function closeSidebarDrawer() {
-        aiSidebar.classList.remove('open');
+        sidebar.classList.remove('open');
         if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false');
         syncScrim();
     }
@@ -600,10 +567,10 @@ Some things you could ask about:
     if (mobileMenuBtn) {
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
         mobileMenuBtn.addEventListener('click', () => {
-            const open = !aiSidebar.classList.contains('open');
-            aiSidebar.classList.toggle('open', open);
+            const open = !sidebar.classList.contains('open');
+            sidebar.classList.toggle('open', open);
             mobileMenuBtn.setAttribute('aria-expanded', String(open));
-            if (open && window.innerWidth < CANVAS_DOCK_MIN) closeCanvas();
+            if (open && window.innerWidth < PANEL_DOCK_MIN) closePanel();
             syncScrim();
         });
     }
@@ -611,18 +578,18 @@ Some things you could ask about:
     if (drawerScrim) {
         drawerScrim.addEventListener('click', () => {
             closeSidebarDrawer();
-            if (window.innerWidth < CANVAS_DOCK_MIN) closeCanvas();
+            if (window.innerWidth < PANEL_DOCK_MIN) closePanel();
         });
     }
 
-    // Canvas starts open only where there's room to dock it beside the chat
-    if (window.innerWidth < CANVAS_DOCK_MIN) closeCanvas();
+    // The panel starts open only where there's room to dock it beside the chat
+    if (window.innerWidth < PANEL_DOCK_MIN) closePanel();
 
     let lastWidth = window.innerWidth;
     window.addEventListener('resize', () => {
         const w = window.innerWidth;
-        if (lastWidth >= CANVAS_DOCK_MIN && w < CANVAS_DOCK_MIN) closeCanvas();
-        if (w >= DESKTOP_MIN) aiSidebar.classList.remove('open');
+        if (lastWidth >= PANEL_DOCK_MIN && w < PANEL_DOCK_MIN) closePanel();
+        if (w >= DESKTOP_MIN) sidebar.classList.remove('open');
         lastWidth = w;
         syncScrim();
     });
@@ -653,16 +620,16 @@ Some things you could ask about:
         document.querySelectorAll('.history-item').forEach(i => {
             i.classList.toggle('active', i.dataset.topic === 'welcome');
         });
-        if (aiPromptInput) {
-            aiPromptInput.value = '';
-            aiPromptInput.style.height = 'auto';
-            if (finePointer) aiPromptInput.focus();
+        if (promptInput) {
+            promptInput.value = '';
+            promptInput.style.height = 'auto';
+            if (finePointer) promptInput.focus();
         }
     }
 
-    // Open the canvas alongside an answer only where it can dock without covering the chat
-    function suggestCanvas(tab) {
-        if (window.innerWidth >= CANVAS_DOCK_MIN) openCanvas(tab);
+    // Open the panel alongside an answer only where it can dock without covering the chat
+    function suggestPanel(tab) {
+        if (window.innerWidth >= PANEL_DOCK_MIN) openPanel(tab);
     }
 
     // Quick Memory Navigation in Sidebar
@@ -699,7 +666,7 @@ Some things you could ask about:
             const entry = TOPIC_PROMPTS[topic];
             if (!entry) return;
             handleUserSubmit(entry[0]);
-            if (entry[1]) suggestCanvas(entry[1]);
+            if (entry[1]) suggestPanel(entry[1]);
         });
     });
 
@@ -725,7 +692,7 @@ Some things you could ask about:
     if (heroAnnounce) {
         heroAnnounce.addEventListener('click', () => {
             handleUserSubmit(heroAnnounce.dataset.prompt);
-            suggestCanvas('projects');
+            suggestPanel('projects');
         });
     }
 
@@ -733,7 +700,7 @@ Some things you could ask about:
     if (heroProjectsBtn) {
         heroProjectsBtn.addEventListener('click', () => {
             playAudioChime('click');
-            openCanvas('projects');
+            openPanel('projects');
         });
     }
 
@@ -755,7 +722,7 @@ Some things you could ask about:
             const entry = QUICK_TAG_PROMPTS[this.dataset.query];
             if (!entry) return;
             handleUserSubmit(entry[0]);
-            if (entry[1]) suggestCanvas(entry[1]);
+            if (entry[1]) suggestPanel(entry[1]);
         });
     });
 
@@ -820,11 +787,11 @@ Some things you could ask about:
         skills: { label: "Skills", query: "What are your core technical skills?" },
         projects: { label: "All projects", query: "Show me all your projects." },
         contact: { label: "Contact", query: "How can I contact you?" },
-        certificateTab: { label: "View certificate", action: () => openCanvas('certificate') },
+        certificateTab: { label: "View certificate", action: () => openPanel('certificate') },
         certificateFull: { label: "Open full size", action: () => openImageModal() },
         viewPoster: { label: "View poster", action: () => openImageModal('hackathon-paradise.jpg') },
-        skillsTab: { label: "Skills breakdown", action: () => openCanvas('skills') },
-        contactTab: { label: "Contact card", action: () => openCanvas('contact') },
+        skillsTab: { label: "Skills breakdown", action: () => openPanel('skills') },
+        contactTab: { label: "Contact card", action: () => openPanel('contact') },
         visitOrbnet: { label: "Visit orbnet.in", url: "https://orbnet.in" },
         visitLibrary: { label: "Visit the library", url: "https://www.vidhyasthalilibrary.online/" },
         visitYoutube: { label: "Visit the channel", url: "https://www.youtube.com/@algorithmsoft" },
@@ -835,21 +802,21 @@ Some things you could ask about:
     const RESPONSES = {
         greeting: { chips: ['about', 'orbnet', 'palarsoft', 'projects'] },
         devan: { chips: ['about', 'projects', 'contact'] },
-        orbnet: { chips: ['visitOrbnet', 'library', 'palarsoft'], canvasTab: 'projects' },
-        palarsoft: { chips: ['certificateTab', 'orbnet', 'skills'], canvasTab: 'certificate' },
-        certificate: { chips: ['certificateFull', 'palarsoft'], canvasTab: 'certificate' },
-        library: { chips: ['visitLibrary', 'orbnet', 'creative'], canvasTab: 'projects' },
-        projects: { chips: ['visitLibrary', 'visitOrbnet', 'skillsTab'], canvasTab: 'projects' },
-        skills: { chips: ['skillsTab', 'projects', 'palarsoft'], canvasTab: 'skills' },
+        orbnet: { chips: ['visitOrbnet', 'library', 'palarsoft'], panelTab: 'projects' },
+        palarsoft: { chips: ['certificateTab', 'orbnet', 'skills'], panelTab: 'certificate' },
+        certificate: { chips: ['certificateFull', 'palarsoft'], panelTab: 'certificate' },
+        library: { chips: ['visitLibrary', 'orbnet', 'creative'], panelTab: 'projects' },
+        projects: { chips: ['visitLibrary', 'visitOrbnet', 'skillsTab'], panelTab: 'projects' },
+        skills: { chips: ['skillsTab', 'projects', 'palarsoft'], panelTab: 'skills' },
         creative: { chips: ['visitYoutube', 'projects', 'about'] },
         hackathon: { chips: ['viewPoster', 'orbnet', 'contactTab'] },
         about: { chips: ['orbnet', 'palarsoft', 'library'] },
-        contact: { chips: ['email', 'linkedin', 'contactTab'], canvasTab: 'contact' },
+        contact: { chips: ['email', 'linkedin', 'contactTab'], panelTab: 'contact' },
         resume: { chips: ['certificateTab', 'email'] },
         overview: { chips: ['about', 'projects', 'certificateTab', 'contact'] }
     };
 
-    function generateAgentResponse(query) {
+    function buildReply(query) {
         const intent = detectIntent(query);
         const key = intent && KNOWLEDGE_BASE[intent] ? intent : 'overview';
         const spec = RESPONSES[key];
@@ -858,13 +825,13 @@ Some things you could ask about:
         if (!intent) {
             text = "I haven't written an answer for that one yet, so here's the short version.\n\n" + text;
         }
-        const note = PERSPECTIVE_NOTES[currentModel];
+        const note = PERSPECTIVE_NOTES[currentAudience];
         if (note && !['contact', 'greeting', 'devan'].includes(key)) text += '\n\n' + note;
 
         return {
             text,
             chips: spec.chips.map(id => CHIPS[id]),
-            canvasTab: spec.canvasTab
+            panelTab: spec.panelTab
         };
     }
 
@@ -881,23 +848,23 @@ Some things you could ask about:
         const cleanText = text.trim();
         welcomeHero.classList.add('hidden');
         document.body.classList.add('is-chatting');
-        setModelMenu(false);
+        setAudienceMenu(false);
 
         playAudioChime('send');
         appendUserMessage(cleanText);
         scrollToBottom(true);
 
-        if (aiPromptInput) {
-            aiPromptInput.value = '';
-            aiPromptInput.style.height = 'auto';
+        if (promptInput) {
+            promptInput.value = '';
+            promptInput.style.height = 'auto';
         }
 
-        const responseData = generateAgentResponse(cleanText);
+        const responseData = buildReply(cleanText);
 
         // Lock input for the whole round-trip, including the short "thinking" pause
         isStreaming = true;
         if (dockSendBtn) dockSendBtn.disabled = true;
-        streamTimer = setTimeout(() => streamAgentResponse(responseData), 250);
+        streamTimer = setTimeout(() => streamReply(responseData), 250);
     }
 
     function appendUserMessage(text) {
@@ -914,23 +881,23 @@ Some things you could ask about:
         if (btn) btn.querySelector('span').textContent = label;
     }
 
-    function streamAgentResponse(data) {
+    function streamReply(data) {
         playAudioChime('receive');
 
         const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-message agent-message';
+        msgDiv.className = 'chat-message reply-message';
         msgDiv.innerHTML = `
-            <div class="agent-avatar-col">
-                <div class="agent-bubble-avatar">
-                    <img src="${currentAvatarSrc()}" alt="Devansh" class="agent-thumb-avatar" onerror="this.style.display='none';this.parentElement.textContent='DB';">
+            <div class="reply-avatar-col">
+                <div class="reply-avatar">
+                    <img src="${currentAvatarSrc()}" alt="Devansh" class="reply-avatar-img" onerror="this.style.display='none';this.parentElement.textContent='DB';">
                 </div>
             </div>
-            <div class="agent-content-col">
-                <div class="agent-meta-header">
-                    <span class="agent-name-tag">Devan</span>
+            <div class="reply-content">
+                <div class="reply-header">
+                    <span class="reply-name">Devan</span>
                 </div>
-                <div class="agent-bubble-body">
-                    <span class="stream-text"></span><span class="ai-typing-cursor"></span>
+                <div class="reply-body">
+                    <span class="stream-text"></span><span class="typing-cursor"></span>
                 </div>
                 <div class="message-actions-bar" hidden>
                     <button class="msg-action-btn copy-msg-btn" title="Copy text">
@@ -949,7 +916,7 @@ Some things you could ask about:
         scrollToBottom(true);
 
         const streamTextSpan = msgDiv.querySelector('.stream-text');
-        const cursorSpan = msgDiv.querySelector('.ai-typing-cursor');
+        const cursorSpan = msgDiv.querySelector('.typing-cursor');
         const actionsBar = msgDiv.querySelector('.message-actions-bar');
         const rawText = data.text;
 
@@ -992,10 +959,10 @@ Some things you could ask about:
                     chipsContainer.appendChild(chipBtn);
                 });
 
-                msgDiv.querySelector('.agent-content-col').appendChild(chipsContainer);
+                msgDiv.querySelector('.reply-content').appendChild(chipsContainer);
             }
 
-            if (data.canvasTab) suggestCanvas(data.canvasTab);
+            if (data.panelTab) suggestPanel(data.panelTab);
             scrollToBottom();
 
             const copyBtn = msgDiv.querySelector('.copy-msg-btn');
@@ -1129,15 +1096,15 @@ Some things you could ask about:
     // ===================================================================
     // INPUT DOCK INTERACTIONS & KEYBOARD BINDINGS
     // ===================================================================
-    if (aiPromptInput) {
+    if (promptInput) {
         // Auto-expand textarea
-        aiPromptInput.addEventListener('input', function () {
+        promptInput.addEventListener('input', function () {
             this.style.height = 'auto';
             this.style.height = Math.min(this.scrollHeight, 140) + 'px';
         });
 
         // Enter key to send (ignored mid-composition for IME keyboards)
-        aiPromptInput.addEventListener('keydown', function (e) {
+        promptInput.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
                 e.preventDefault();
                 handleUserSubmit(this.value);
@@ -1147,7 +1114,7 @@ Some things you could ask about:
 
     if (dockSendBtn) {
         dockSendBtn.addEventListener('click', () => {
-            if (aiPromptInput) handleUserSubmit(aiPromptInput.value);
+            if (promptInput) handleUserSubmit(promptInput.value);
         });
     }
 
@@ -1175,7 +1142,7 @@ Some things you could ask about:
 
             recognition.onresult = (event) => {
                 const speechText = event.results[0][0].transcript;
-                if (aiPromptInput) aiPromptInput.value = speechText;
+                if (promptInput) promptInput.value = speechText;
                 handleUserSubmit(speechText);
             };
             recognition.onerror = (event) => {
@@ -1200,7 +1167,7 @@ Some things you could ask about:
     if (sidebarProfileTrigger) {
         sidebarProfileTrigger.addEventListener('click', () => {
             if (!isDesktop()) closeSidebarDrawer();
-            openCanvas('contact');
+            openPanel('contact');
         });
     }
 
@@ -1213,17 +1180,17 @@ Some things you could ask about:
             showToast('Cleared');
         }
 
-        // Escape closes the topmost layer: modal → focus menu → drawer → overlay canvas
+        // Escape closes the topmost layer: modal → focus menu → drawer → overlay panel
         if (e.key === 'Escape') {
             if (imageModalOverlay && imageModalOverlay.classList.contains('open')) {
                 closeImageModal();
-            } else if (modelSelectorWrapper && modelSelectorWrapper.classList.contains('open')) {
-                setModelMenu(false);
-                modelSelectorBtn.focus();
-            } else if (!isDesktop() && aiSidebar.classList.contains('open')) {
+            } else if (audienceSelector && audienceSelector.classList.contains('open')) {
+                setAudienceMenu(false);
+                audienceBtn.focus();
+            } else if (!isDesktop() && sidebar.classList.contains('open')) {
                 closeSidebarDrawer();
-            } else if (artifactsCanvas && !artifactsCanvas.classList.contains('closed') && window.innerWidth < CANVAS_DOCK_MIN) {
-                closeCanvas();
+            } else if (workPanel && !workPanel.classList.contains('closed') && window.innerWidth < PANEL_DOCK_MIN) {
+                closePanel();
             }
         }
     });
@@ -1255,7 +1222,7 @@ Some things you could ask about:
 
     if (finePointer && !reduceMotion) {
         document.querySelectorAll('.prompt-card').forEach(el => attachTilt(el, 6));
-        document.querySelectorAll('.artifact-card').forEach(el => attachTilt(el, 3));
+        document.querySelectorAll('.project-card').forEach(el => attachTilt(el, 3));
 
         // Hero avatar leans toward the pointer anywhere on the stage
         const portal = document.getElementById('heroAvatarPortal');
@@ -1292,7 +1259,7 @@ Some things you could ask about:
     // Focus the input on desktop only; on phones it would pop the keyboard over the hero
     if (finePointer) {
         setTimeout(() => {
-            if (aiPromptInput) aiPromptInput.focus({ preventScroll: true });
+            if (promptInput) promptInput.focus({ preventScroll: true });
         }, 600);
     }
 
