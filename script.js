@@ -111,9 +111,15 @@ I'm open to frontend roles, internships and collaborations.`,
 - **Freelance:** Vidhyasthali Library website ([vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/))
 - **Stack:** HTML, CSS, JavaScript, Bootstrap, C++, HeyGen, DaVinci Resolve`,
 
-        greeting: `Hey, I'm Devansh — B.Tech CSE student at GIT Jaipur, frontend developer and founder of Orbnet.
+        greeting: `Hey, I'm **Devan**, Devansh's AI twin. I answer as him, using words he wrote himself.
 
-Ask me about my startup, my internship at Palarsoft, my YouTube channel, or how DSA in C++ is going.`,
+Ask me about Orbnet, the Palarsoft internship, Algorithm Soft, Hackathon Paradise, or how DSA in C++ is going.`,
+
+        devan: `I'm **Devan**, Devansh Bhardwaj's AI twin. Think of me as a version of him you can talk to any time.
+
+Ask me anything about his work and I'll answer in his voice: his startup Orbnet, his internship at Palarsoft, the projects he's built, his YouTube channel, or how to get in touch.
+
+Every answer is written by Devansh himself, so what you read is exactly what he'd tell you.`,
 
         overview: `I'm a second-year B.Tech CSE student at GIT Jaipur (affiliated to RTU Kota). I founded Orbnet ([orbnet.in](https://orbnet.in)), did a paid frontend internship at Palarsoft, and built the Vidhyasthali Library website ([vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)) as a freelance project.
 
@@ -771,8 +777,9 @@ Some things you could ask about:
         { id: 'resume', terms: [[3, 'resume', 'cv']] },
         { id: 'skills', terms: [[3, 'skills?', 'stack', 'heygen', 'davinci', 'canva', 'prompt engineering', 'c\\+\\+', 'dsa', 'javascript', 'html', 'css', 'bootstrap', 'mongo(db)?', 'data structures'], [2, 'tech(nical|nologies|nology)?', 'languages?', 'algorithms?', 'coding', 'programming', 'tools']] },
         { id: 'projects', terms: [[3, 'projects?', 'shipped', 'showcase'], [1, 'built', 'build', 'work', 'made', 'apps?', 'live']] },
-        { id: 'about', terms: [[3, 'about (yourself|you)', 'who are you', 'bio', 'yourself'], [2, 'background', 'college', 'education', 'degree', 'university', 'git jaipur', 'rtu', 'kota', 'story', 'journey'], [1, 'studying', 'student']] },
-        { id: 'overview', terms: [[3, 'overview', 'summary', 'portfolio', 'everything']] }
+        { id: 'about', terms: [[3, 'about (yourself|you)', 'who are you', 'bio', 'yourself'], [2, 'background', 'college', 'education', 'degree', 'university', 'git jaipur', 'rtu', 'kota', 'story', 'journey'], [1, 'studying', 'student', 'devansh', 'him', 'he']] },
+        { id: 'overview', terms: [[3, 'overview', 'summary', 'portfolio', 'everything']] },
+        { id: 'devan', terms: [[4, 'devan', 'what is this', 'are you (an )?(ai|bot|robot|real|human)', 'chat ?bot', 'ai twin', 'how does this work'], [2, 'who am i talking to', 'are you devansh']] }
     ];
 
     // Compile once: each term becomes a whole-word, case-insensitive regex
@@ -827,6 +834,7 @@ Some things you could ask about:
 
     const RESPONSES = {
         greeting: { chips: ['about', 'orbnet', 'palarsoft', 'projects'] },
+        devan: { chips: ['about', 'projects', 'contact'] },
         orbnet: { chips: ['visitOrbnet', 'library', 'palarsoft'], canvasTab: 'projects' },
         palarsoft: { chips: ['certificateTab', 'orbnet', 'skills'], canvasTab: 'certificate' },
         certificate: { chips: ['certificateFull', 'palarsoft'], canvasTab: 'certificate' },
@@ -851,7 +859,7 @@ Some things you could ask about:
             text = "I haven't written an answer for that one yet, so here's the short version.\n\n" + text;
         }
         const note = PERSPECTIVE_NOTES[currentModel];
-        if (note && key !== 'contact' && key !== 'greeting') text += '\n\n' + note;
+        if (note && !['contact', 'greeting', 'devan'].includes(key)) text += '\n\n' + note;
 
         return {
             text,
@@ -919,7 +927,7 @@ Some things you could ask about:
             </div>
             <div class="agent-content-col">
                 <div class="agent-meta-header">
-                    <span class="agent-name-tag">Devansh</span>
+                    <span class="agent-name-tag">Devan</span>
                 </div>
                 <div class="agent-bubble-body">
                     <span class="stream-text"></span><span class="ai-typing-cursor"></span>
@@ -1271,6 +1279,15 @@ Some things you could ask about:
     // INITIALIZATION & WELCOME SEQUENCE
     // ===================================================================
     applyAvatar(activeAvatar, false);
+
+    // First visit on desktop: briefly explain who "Devan" is, then get out of the way
+    const brandInfo = document.querySelector('.brand-info');
+    if (brandInfo && isDesktop() && !store.get('devansh_seen_hint')) {
+        store.set('devansh_seen_hint', '1');
+        setTimeout(() => brandInfo.classList.add('show-hint'), 1400);
+        setTimeout(() => brandInfo.classList.remove('show-hint'), 7400);
+        brandInfo.addEventListener('pointerenter', () => brandInfo.classList.remove('show-hint'), { once: true });
+    }
 
     // Focus the input on desktop only; on phones it would pop the keyboard over the hero
     if (finePointer) {
