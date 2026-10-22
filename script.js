@@ -17,7 +17,7 @@
         orbnetUrl: "https://orbnet.in",
         libraryUrl: "https://www.vidhyasthalilibrary.online/",
 
-        about: `I'm a second-year B.Tech CSE student at Global Institute of Technology (GIT), Jaipur, affiliated to Rajasthan Technical University (RTU), Kota. In my first year I started **Orbnet**, an internship discovery platform for students, and signed Avichal Techno Labs as our first paying client. I also spent three months as a paid frontend developer intern at **Palarsoft Internet Pvt. Ltd.** (associated with Vimalsoft Technologies), building client websites and working on AI video pipelines.
+        about: `I'm a second-year B.Tech CSE student at Global Institute of Technology (GIT), Jaipur, affiliated to Rajasthan Technical University (RTU), Kota. In my first year I started **Orbnet**, an internship discovery platform for students, and signed Avichal Techno Labs as our first paying client. I also spent three months as a paid frontend developer intern at **Palarsoft Internet Pvt. Ltd.**, building client websites and working on AI video pipelines.
 
 Right now most of my spare time goes into data structures and algorithms in C++.`,
 
@@ -31,7 +31,7 @@ Right now most of my spare time goes into data structures and algorithms in C++.
 
 Why I started it: in first year I watched classmates who wanted real experience struggle to find internships that taught them anything. Orbnet connects them with startups that need the help.`,
 
-        palarsoft: `**Palarsoft Internet Pvt. Ltd.** — frontend developer intern, April to June 2026. Paid, remote, associated with Vimalsoft Technologies.
+        palarsoft: `**Palarsoft Internet Pvt. Ltd.** — frontend developer intern, April to June 2026. Paid and remote.
 
 - Built responsive multi-page client blog websites from scratch with HTML, CSS, JavaScript and Bootstrap.
 - Integrated HeyGen AI avatar videos into client landing pages and marketing material.
@@ -39,13 +39,13 @@ Why I started it: in first year I watched classmates who wanted real experience 
 
 The certificate is issued and verified under the Ministry of Corporate Affairs (MCA), Government of India. It's in the Certificate tab if you want to see it.`,
 
-        library: `**Vidhyasthali Library** — [vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)
+        library: `**Vidhyasthali Library** — freelance project. [vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)
 
-A free digital library I built for students in Barmer, Rajasthan.
+I designed and built the website for Vidhyasthali Library, a library and reading hall for students in Barmer, Rajasthan.
 
-- 12+ classic Hindi and English books you can open instantly. No paywall, no sign-up.
-- Mobile-first reading layout that loads quickly.
-- Plain HTML, CSS and JavaScript, with care for typography and SEO.`,
+- Shows off the 32+ desk AC reading hall to students looking for a place to study.
+- 12+ classic Hindi and English books students can read online for free. No sign-up.
+- Mobile-first layout that loads quickly, built with plain HTML, CSS and JavaScript, with care for typography and SEO.`,
 
         skills: `What I work with:
 
@@ -56,12 +56,7 @@ A free digital library I built for students in Barmer, Rajasthan.
 
 Right now I'm working through DSA in C++ alongside my B.Tech coursework.`,
 
-        creative: `**Algorithm Soft** is a YouTube channel where I make educational programming videos.
-
-- **HeyGen:** AI avatar presenters for the videos. I also used HeyGen for client landing pages and campaigns during my internship.
-- **DaVinci Resolve 19:** multi-track editing, colour grading and audio sync.
-- **Canva:** channel branding and thumbnails.
-- **Prompt engineering:** structuring multi-step LLM workflows for content and developer tools.`,
+        creative: `**Algorithm Soft** is a YouTube channel where I make educational programming videos.`,
 
         hackathon: `**Hackathon Paradise** — a hackathon I organised through Orbnet on 11 October.
 
@@ -81,10 +76,10 @@ You can view the full-resolution copy and download it from the Certificate tab.`
 
         projects: `Things I've shipped:
 
-1. **Vidhyasthali Library** — free reading portal for students in Barmer. [vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)
+1. **Vidhyasthali Library** — freelance website for a library and reading hall in Barmer. [vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)
 2. **Orbnet** — my startup: internship discovery, with Avichal Techno Labs as first partner. [orbnet.in](https://orbnet.in)
 3. **Client blog platform** — multi-page blog built during my Palarsoft internship.
-4. **Algorithm Soft** — a YouTube channel with educational programming videos, made with HeyGen and edited in DaVinci Resolve 19.
+4. **Algorithm Soft** — a YouTube channel with educational programming videos.
 
 Screenshots and links are in the Projects tab.`,
 
@@ -102,14 +97,14 @@ I'm open to frontend roles, internships and collaborations.`,
 - **Education:** B.Tech CSE, second year — Global Institute of Technology (GIT), Jaipur, affiliated to RTU Kota
 - **Experience:** paid frontend developer intern, Palarsoft Internet Pvt. Ltd. (MCA-recognised certificate)
 - **Startup:** founder and developer, Orbnet ([orbnet.in](https://orbnet.in))
-- **Live project:** Vidhyasthali Library ([vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/))
+- **Freelance:** Vidhyasthali Library website ([vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/))
 - **Stack:** HTML, CSS, JavaScript, Bootstrap, C++, HeyGen, DaVinci Resolve`,
 
         greeting: `Hey, I'm Devansh — B.Tech CSE student at GIT Jaipur, frontend developer and founder of Orbnet.
 
 Ask me about my startup, my internship at Palarsoft, my YouTube channel, or how DSA in C++ is going.`,
 
-        overview: `I'm a second-year B.Tech CSE student at GIT Jaipur (affiliated to RTU Kota). I founded Orbnet ([orbnet.in](https://orbnet.in)), did a paid frontend internship at Palarsoft, and built Vidhyasthali Library ([vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)) for students in Barmer.
+        overview: `I'm a second-year B.Tech CSE student at GIT Jaipur (affiliated to RTU Kota). I founded Orbnet ([orbnet.in](https://orbnet.in)), did a paid frontend internship at Palarsoft, and built the Vidhyasthali Library website ([vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)) as a freelance project.
 
 Some things you could ask about:
 
@@ -658,7 +653,7 @@ Some things you could ask about:
         about: ["Tell me about yourself, your background, and your college journey."],
         orbnet: ["Tell me about Orbnet. What is it and how did you build it?", 'projects'],
         palarsoft: ["What did you do during your paid frontend internship at Palarsoft?"],
-        library: ["Show me the Vidhyasthali Library live production project.", 'projects'],
+        library: ["Show me the Vidhyasthali Library website you built.", 'projects'],
         skills: ["What are your core technical skills and programming languages?", 'skills'],
         creative: ["Tell me about your YouTube channel, Algorithm Soft."],
         hackathon: ["Tell me about Hackathon Paradise."],
@@ -756,14 +751,14 @@ Some things you could ask about:
     // ===================================================================
     const INTENTS = [
         { id: 'certificate', terms: [[3, 'certificates?', 'mca', 'credentials?'], [2, 'verif(y|ied|ication)', 'proof']] },
-        { id: 'library', terms: [[3, 'vidhyasthali', 'library', 'barmer'], [1, 'books?', 'reading']] },
-        { id: 'creative', terms: [[3, 'heygen', 'davinci', 'canva', 'algorithm soft', 'youtube', 'yt', 'channel'], [2, 'videos?', 'media', 'creative', 'editing', 'prompt engineering'], [1, 'design']] },
+        { id: 'library', terms: [[3, 'vidhyasthali', 'library', 'barmer'], [2, 'freelanc\\w*', 'clients?'], [1, 'books?', 'reading']] },
+        { id: 'creative', terms: [[3, 'algorithm soft', 'youtube', 'yt', 'channel'], [2, 'videos?', 'creative']] },
         { id: 'hackathon', terms: [[3, 'hackathons?', 'paradise'], [2, 'organi[sz](er|ing|e|ed)', 'leadership', 'events?', 'prizes?', 'sponsors?', 'competition'], [1, 'lead']] },
         { id: 'orbnet', terms: [[3, 'orbnet', 'avichal'], [2, 'startups?', 'founder', 'found(ed|ing)?', 'entrepreneur\\w*']] },
-        { id: 'palarsoft', terms: [[3, 'palarsoft', 'vimalsoft'], [2, 'internships?', 'intern', 'experience', 'jobs?', 'career', 'employment'], [1, 'professional', 'company']] },
+        { id: 'palarsoft', terms: [[3, 'palarsoft'], [2, 'internships?', 'intern', 'experience', 'jobs?', 'career', 'employment'], [1, 'professional', 'company']] },
         { id: 'contact', terms: [[3, 'contact', 'hire', 'hiring', 'email', 'linkedin', 'get in touch'], [2, 'reach', 'collaborat\\w*', 'message', 'available']] },
         { id: 'resume', terms: [[3, 'resume', 'cv']] },
-        { id: 'skills', terms: [[3, 'skills?', 'stack', 'c\\+\\+', 'dsa', 'javascript', 'html', 'css', 'bootstrap', 'mongo(db)?', 'data structures'], [2, 'tech(nical|nologies|nology)?', 'languages?', 'algorithms?', 'coding', 'programming', 'tools']] },
+        { id: 'skills', terms: [[3, 'skills?', 'stack', 'heygen', 'davinci', 'canva', 'prompt engineering', 'c\\+\\+', 'dsa', 'javascript', 'html', 'css', 'bootstrap', 'mongo(db)?', 'data structures'], [2, 'tech(nical|nologies|nology)?', 'languages?', 'algorithms?', 'coding', 'programming', 'tools']] },
         { id: 'projects', terms: [[3, 'projects?', 'shipped', 'showcase'], [1, 'built', 'build', 'work', 'made', 'apps?', 'live']] },
         { id: 'about', terms: [[3, 'about (yourself|you)', 'who are you', 'bio', 'yourself'], [2, 'background', 'college', 'education', 'degree', 'university', 'git jaipur', 'rtu', 'kota', 'story', 'journey'], [1, 'studying', 'student']] },
         { id: 'overview', terms: [[3, 'overview', 'summary', 'portfolio', 'everything']] }
@@ -795,7 +790,7 @@ Some things you could ask about:
     const PERSPECTIVE_NOTES = {
         Engineer: "> From the engineering side: semantic HTML, CSS that stays maintainable as a site grows, plain JavaScript where a framework isn't needed, and getting time and space complexity right in C++.",
         Founder: "> From the founder side: ship early, listen to users, and land real partners — Avichal Techno Labs was the first. The rest follows from that.",
-        Creator: "> From the creator side: on Algorithm Soft I pair HeyGen avatar workflows with careful multi-track editing in DaVinci Resolve 19 so each video feels made, not generated."
+        Creator: "> From the creator side: I also run Algorithm Soft, a YouTube channel where I make educational programming videos."
     };
 
     const CHIPS = {
@@ -826,7 +821,7 @@ Some things you could ask about:
         library: { chips: ['visitLibrary', 'orbnet', 'creative'], canvasTab: 'projects' },
         projects: { chips: ['visitLibrary', 'visitOrbnet', 'skillsTab'], canvasTab: 'projects' },
         skills: { chips: ['skillsTab', 'projects', 'palarsoft'], canvasTab: 'skills' },
-        creative: { chips: ['projects', 'skillsTab'] },
+        creative: { chips: ['projects', 'about'] },
         hackathon: { chips: ['viewPoster', 'orbnet', 'contactTab'] },
         about: { chips: ['orbnet', 'palarsoft', 'library'] },
         contact: { chips: ['email', 'linkedin', 'contactTab'], canvasTab: 'contact' },

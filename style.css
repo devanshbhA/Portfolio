@@ -1,7 +1,3 @@
-/* ===================================================================
-   DEVANSH BHARDWAJ — PORTFOLIO STYLES
-   Ink background, one vermilion accent, Google Sans.
-   =================================================================== */
 
 :root,
 [data-theme="ink"] {
@@ -120,9 +116,7 @@ a:hover {
     background: rgba(255, 255, 255, 0.22);
 }
 
-/* ===================================================================
-   BACKGROUND AURORA & PARTICLE CANVAS
-   =================================================================== */
+
 
 .ai-ambient-backdrop {
     position: fixed;
@@ -198,9 +192,7 @@ a:hover {
     z-index: 1;
 }
 
-/* ===================================================================
-   MAIN APP LAYOUT (Sidebar + Main Stage + Artifacts Canvas)
-   =================================================================== */
+
 
 .ai-app-layout {
     position: relative;
@@ -216,9 +208,7 @@ a:hover {
     display: none;
 }
 
-/* ===================================================================
-   SIDEBAR (Claude / ChatGPT Inspired)
-   =================================================================== */
+
 
 .ai-sidebar {
     width: 270px;
