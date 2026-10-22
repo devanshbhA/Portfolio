@@ -16,6 +16,7 @@
         linkedin: "https://www.linkedin.com/in/devansh-bhardwaj-b82632324/",
         orbnetUrl: "https://orbnet.in",
         libraryUrl: "https://www.vidhyasthalilibrary.online/",
+        youtubeUrl: "https://www.youtube.com/@algorithmsoft",
 
         about: `I'm a second-year B.Tech CSE student at Global Institute of Technology (GIT), Jaipur, affiliated to Rajasthan Technical University (RTU), Kota. In my first year I started **Orbnet**, an internship discovery platform for students, and signed Avichal Techno Labs as our first paying client. I also spent three months as a paid frontend developer intern at **Palarsoft Internet Pvt. Ltd.**, building client websites and working on AI video pipelines.
 
@@ -56,7 +57,9 @@ I designed and built the website for Vidhyasthali Library, a library and reading
 
 Right now I'm working through DSA in C++ alongside my B.Tech coursework.`,
 
-        creative: `**Algorithm Soft** is a YouTube channel where I make educational programming videos.`,
+        creative: `**Algorithm Soft** is a YouTube channel where I make educational programming videos.
+
+Watch it at [youtube.com/@algorithmsoft](https://www.youtube.com/@algorithmsoft)`,
 
         hackathon: `**Hackathon Paradise** — a hackathon I organised through Orbnet on 11 October.
 
@@ -79,7 +82,7 @@ You can view the full-resolution copy and download it from the Certificate tab.`
 1. **Vidhyasthali Library** — freelance website for a library and reading hall in Barmer. [vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)
 2. **Orbnet** — my startup: internship discovery, with Avichal Techno Labs as first partner. [orbnet.in](https://orbnet.in)
 3. **Client blog platform** — multi-page blog built during my Palarsoft internship.
-4. **Algorithm Soft** — a YouTube channel with educational programming videos.
+4. **Algorithm Soft** — a YouTube channel with educational programming videos. [youtube.com/@algorithmsoft](https://www.youtube.com/@algorithmsoft)
 
 Screenshots and links are in the Projects tab.`,
 
@@ -88,6 +91,7 @@ Screenshots and links are in the Projects tab.`,
 - Email: [devanshbhardwaj375@gmail.com](mailto:devanshbhardwaj375@gmail.com)
 - LinkedIn: [devansh-bhardwaj](https://www.linkedin.com/in/devansh-bhardwaj-b82632324/)
 - Startup: [orbnet.in](https://orbnet.in)
+- YouTube: [@algorithmsoft](https://www.youtube.com/@algorithmsoft)
 - Based in Jaipur, Rajasthan, India
 
 I'm open to frontend roles, internships and collaborations.`,
@@ -809,6 +813,7 @@ Some things you could ask about:
         contactTab: { label: "Contact card", action: () => openCanvas('contact') },
         visitOrbnet: { label: "Visit orbnet.in", url: "https://orbnet.in" },
         visitLibrary: { label: "Visit the library", url: "https://www.vidhyasthalilibrary.online/" },
+        visitYoutube: { label: "Visit the channel", url: "https://www.youtube.com/@algorithmsoft" },
         email: { label: "Send an email", url: "mailto:devanshbhardwaj375@gmail.com" },
         linkedin: { label: "LinkedIn", url: "https://www.linkedin.com/in/devansh-bhardwaj-b82632324/" }
     };
@@ -821,7 +826,7 @@ Some things you could ask about:
         library: { chips: ['visitLibrary', 'orbnet', 'creative'], canvasTab: 'projects' },
         projects: { chips: ['visitLibrary', 'visitOrbnet', 'skillsTab'], canvasTab: 'projects' },
         skills: { chips: ['skillsTab', 'projects', 'palarsoft'], canvasTab: 'skills' },
-        creative: { chips: ['projects', 'about'] },
+        creative: { chips: ['visitYoutube', 'projects', 'about'] },
         hackathon: { chips: ['viewPoster', 'orbnet', 'contactTab'] },
         about: { chips: ['orbnet', 'palarsoft', 'library'] },
         contact: { chips: ['email', 'linkedin', 'contactTab'], canvasTab: 'contact' },

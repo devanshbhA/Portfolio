@@ -38,4 +38,5 @@ Then open http://localhost:3000. Opening `index.html` directly also works.
 - Email: [devanshbhardwaj375@gmail.com](mailto:devanshbhardwaj375@gmail.com)
 - LinkedIn: [devansh-bhardwaj](https://www.linkedin.com/in/devansh-bhardwaj-b82632324/)
 - Orbnet: [orbnet.in](https://orbnet.in)
+- YouTube: [@algorithmsoft](https://www.youtube.com/@algorithmsoft)
 - Vidhyasthali Library: [vidhyasthalilibrary.online](https://www.vidhyasthalilibrary.online/)
