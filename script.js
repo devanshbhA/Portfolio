@@ -26,6 +26,7 @@ Right now most of my spare time goes into data structures and algorithms in C++.
 - An internship discovery platform for students that also helps early-stage startups find talent.
 - Avichal Techno Labs signed on as our first paying partner.
 - I run it end to end: building the platform, deploying it, onboarding users and running the Google Ads campaigns.
+- Organised **Hackathon Paradise**, a 12-hour online hackathon with a ₹10K prize pool.
 - Live at [orbnet.in](https://orbnet.in)
 
 Why I started it: in first year I watched classmates who wanted real experience struggle to find internships that taught them anything. Orbnet connects them with startups that need the help.`,
@@ -62,13 +63,15 @@ Right now I'm working through DSA in C++ alongside my B.Tech coursework.`,
 - **Canva:** channel branding and thumbnails.
 - **Prompt engineering:** structuring multi-step LLM workflows for content and developer tools.`,
 
-        hackathon: `**Lead hackathon organiser** at GIT Jaipur.
+        hackathon: `**Hackathon Paradise** — a hackathon I organised through Orbnet on 11 October.
 
-- Ran college hackathons and their technical tracks.
-- Set up participant registration, wrote problem statements and submission guidelines.
-- Coordinated student teams, mentors and judging.
+- 100% online, 12 hours, teams of 1–4.
+- Three rounds: PPT round, prototype, then a mega final. Open innovation alongside set problem statements.
+- ₹10K prize pool: ₹7,000 and goodies for first, a gaming mouse and gear for second, goodies for third.
+- Entry was ₹200 per team.
+- Sponsored by nexttool.in, Palarsoft Internet Pvt. Ltd., Unauthorized Production and The Darbar.
 
-I enjoy getting builders in one room and turning problem statements into working solutions.`,
+As the organiser I set up registration, wrote the problem statements and submission guidelines, and coordinated teams, mentors and judging.`,
 
         certificate: `**Internship certificate — Palarsoft Internet Pvt. Ltd.**
 
@@ -522,6 +525,10 @@ Some things you could ask about:
         });
     }
 
+    document.querySelectorAll('.view-poster-btn').forEach(btn => {
+        btn.addEventListener('click', () => openImageModal(btn.dataset.src));
+    });
+
     // "Ask about this" buttons on the project cards
     document.querySelectorAll('.ask-about-btn').forEach(btn => {
         btn.addEventListener('click', function () {
@@ -654,7 +661,7 @@ Some things you could ask about:
         library: ["Show me the Vidhyasthali Library live production project.", 'projects'],
         skills: ["What are your core technical skills and programming languages?", 'skills'],
         creative: ["Tell me about your YouTube channel, Algorithm Soft."],
-        hackathon: ["Tell me about your experience as a Lead Hackathon Organizer."],
+        hackathon: ["Tell me about Hackathon Paradise."],
         certificate: ["Show me your verified internship certificate.", 'certificate'],
         contact: ["How can I contact or hire Devansh?", 'contact']
     };
@@ -751,7 +758,7 @@ Some things you could ask about:
         { id: 'certificate', terms: [[3, 'certificates?', 'mca', 'credentials?'], [2, 'verif(y|ied|ication)', 'proof']] },
         { id: 'library', terms: [[3, 'vidhyasthali', 'library', 'barmer'], [1, 'books?', 'reading']] },
         { id: 'creative', terms: [[3, 'heygen', 'davinci', 'canva', 'algorithm soft', 'youtube', 'yt', 'channel'], [2, 'videos?', 'media', 'creative', 'editing', 'prompt engineering'], [1, 'design']] },
-        { id: 'hackathon', terms: [[3, 'hackathons?'], [2, 'organi[sz](er|ing|e|ed)', 'leadership', 'events?'], [1, 'lead']] },
+        { id: 'hackathon', terms: [[3, 'hackathons?', 'paradise'], [2, 'organi[sz](er|ing|e|ed)', 'leadership', 'events?', 'prizes?', 'sponsors?', 'competition'], [1, 'lead']] },
         { id: 'orbnet', terms: [[3, 'orbnet', 'avichal'], [2, 'startups?', 'founder', 'found(ed|ing)?', 'entrepreneur\\w*']] },
         { id: 'palarsoft', terms: [[3, 'palarsoft', 'vimalsoft'], [2, 'internships?', 'intern', 'experience', 'jobs?', 'career', 'employment'], [1, 'professional', 'company']] },
         { id: 'contact', terms: [[3, 'contact', 'hire', 'hiring', 'email', 'linkedin', 'get in touch'], [2, 'reach', 'collaborat\\w*', 'message', 'available']] },
@@ -802,6 +809,7 @@ Some things you could ask about:
         contact: { label: "Contact", query: "How can I contact you?" },
         certificateTab: { label: "View certificate", action: () => openCanvas('certificate') },
         certificateFull: { label: "Open full size", action: () => openImageModal() },
+        viewPoster: { label: "View poster", action: () => openImageModal('hackathon-paradise.jpg') },
         skillsTab: { label: "Skills breakdown", action: () => openCanvas('skills') },
         contactTab: { label: "Contact card", action: () => openCanvas('contact') },
         visitOrbnet: { label: "Visit orbnet.in", url: "https://orbnet.in" },
@@ -819,7 +827,7 @@ Some things you could ask about:
         projects: { chips: ['visitLibrary', 'visitOrbnet', 'skillsTab'], canvasTab: 'projects' },
         skills: { chips: ['skillsTab', 'projects', 'palarsoft'], canvasTab: 'skills' },
         creative: { chips: ['projects', 'skillsTab'] },
-        hackathon: { chips: ['orbnet', 'contactTab'] },
+        hackathon: { chips: ['viewPoster', 'orbnet', 'contactTab'] },
         about: { chips: ['orbnet', 'palarsoft', 'library'] },
         contact: { chips: ['email', 'linkedin', 'contactTab'], canvasTab: 'contact' },
         resume: { chips: ['certificateTab', 'email'] },

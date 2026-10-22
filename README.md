@@ -6,7 +6,7 @@ The site works like a conversation. Visitors pick a topic or type a question, an
 
 ## What's in it
 
-- **Conversation-style answers** about Orbnet, my Palarsoft internship, Vidhyasthali Library, the Algorithm Soft YouTube channel, skills, hackathons and contact details.
+- **Conversation-style answers** about Orbnet, my Palarsoft internship, Vidhyasthali Library, the Algorithm Soft YouTube channel, Hackathon Paradise (organised through Orbnet), skills and contact details.
 - **"Answers for" selector**: Recruiter, Engineer, Founder or Creator. Each adds a short note aimed at that reader.
 - **Work panel** with project cards, the internship certificate (full-size view and download), skills and a contact card.
 - **3D particle field** built with raw WebGL. Thousands of particles drift toward the camera, and a coloured ring follows the cursor. It dims during conversations and stays still when the visitor has reduced motion turned on.

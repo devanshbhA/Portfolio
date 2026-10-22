@@ -3020,3 +3020,12 @@ code {
         font-size: 38px;
     }
 }
+
+/* Portrait posters: show the title area rather than the middle */
+.artifact-media-wrap.poster {
+    height: 180px;
+}
+
+.artifact-media-wrap.poster .artifact-img {
+    object-position: center 8%;
+}
