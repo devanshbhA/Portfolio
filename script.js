@@ -59,7 +59,14 @@ Right now I'm working through DSA in C++ alongside my B.Tech coursework.`,
 
         creative: `**Algorithm Soft** is a YouTube channel where I make educational programming videos.
 
-Watch it at [youtube.com/@algorithmsoft](https://www.youtube.com/@algorithmsoft)`,
+A few videos:
+
+- [The truth of AI with @SidTheITGuy](https://www.youtube.com/watch?v=8cXKNMIJSi8) (14:29)
+- [AI will not replace all programmers and jobs](https://www.youtube.com/watch?v=yzb_Qfwg02w) (7:20)
+- [Best tips to earn money from coding as a student](https://www.youtube.com/watch?v=HskskuRby7s) (2:30)
+- [How to eat food in a FAANG company with the help of DSA](https://www.youtube.com/watch?v=iPamLrQiiwY) (8:07)
+
+Watch the rest at [youtube.com/@algorithmsoft](https://www.youtube.com/@algorithmsoft)`,
 
         hackathon: `**Hackathon Paradise** — a hackathon I organised through Orbnet on 11 October.
 
